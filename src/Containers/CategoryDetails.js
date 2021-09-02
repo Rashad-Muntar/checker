@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Activity from '../Components/Activity';
 import { categoryFetcher } from '../Actions/index';
+import newActivity from './newActivity';
 
 const CategoryDetails = () => {
   const [activities, setActivities] = useState({ data: [] });
@@ -28,6 +29,14 @@ const CategoryDetails = () => {
     getActivitties();
   }, []);
 
+  const handleChange = (e) => {
+    console.log(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault
+  }
+
   const categoryData = useSelector((state) => state.categoryReducer.data);
   console.log(categoryData);
   const dispatch = useDispatch();
@@ -48,6 +57,10 @@ const CategoryDetails = () => {
         )
       ))
     }
+    <newActivity 
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+    />
     </div>
   );
 };
