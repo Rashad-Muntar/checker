@@ -7,7 +7,7 @@ export const categoryAction = (data) => ({
 
 export const categoryFetcher = () => async (dispatch) => {
   try {
-    const response = await axios.get('https://stark-hollows-83409.herokuapp.com/api/categories');
+    const response = await axios.get('http://localhost:3000/api/categories');
     const category = await response.data;
     dispatch(categoryAction(category));
   } catch (error) {
