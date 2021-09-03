@@ -1,9 +1,9 @@
 const initialState = {
-  data: {
-    data: [
+  // data: {
+  data: [
 
-    ],
-  },
+  ],
+  // },
 };
 const categoryReducer = (state = initialState, action) => {
   switch (action.type) {

@@ -1,19 +1,18 @@
-/* eslint-disable radix */
+/* eslint-disable radix, consistent-return, no-unused-expressions */
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import Activity from '../Components/Activity';
-import { categoryFetcher } from '../Actions/index';
-import newActivity from './newActivity';
+import ActivityForm from './ActivityForm';
 
 const CategoryDetails = () => {
-  const [activities, setActivities] = useState({ data: [] });
+  const [activities, setActivities] = useState([]);
+  const [title, setTitle] = useState('');
+  const [reminder, setReminder] = useState('');
   console.log(activities);
   const id = useParams();
   const comparer = parseInt(id.id);
 
-  console.log(typeof id.id);
   const getActivitties = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/api/categories/${id.id}/activities`);
@@ -29,39 +28,78 @@ const CategoryDetails = () => {
     getActivitties();
   }, []);
 
-  const handleChange = (e) => {
-    console.log(e.target.value)
-  }
+  const handleChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleChangeReminder = (e) => {
+    setReminder(e.target.value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault
-  }
+    e.preventDefault();
 
-  const categoryData = useSelector((state) => state.categoryReducer.data);
-  console.log(categoryData);
-  const dispatch = useDispatch();
+    const activityData = {
+      title,
+      reminder: new Date(reminder),
+      complete: false,
+      category_id: comparer,
+    };
+    try {
+      axios.post(`http://localhost:3000/api/categories/${comparer}/activities/`, activityData)
+        .then((response) => {
+          setActivities([response.data, ...activities]);
+        });
+    } catch (error) {
+      return error.message;
+    }
+    setReminder('');
+    setTitle('');
+  };
 
-  useEffect(() => {
-    dispatch(categoryFetcher());
-  }, []);
+  // const updateActivity = () => {
+  //   try {
+  //     axios.post(`http://localhost:3000/api/categories/${comparer}/activities/`, {
+  //       complete: true,
+  //     })
+  //       .then((response) => {
+  //         setActivities([response.data, ...activities]);
+  //       });
+  //   } catch (error) {
+  //     return error.message;
+  //   }
+  // };
+
+  const buttonClick = (e) => {
+    activities.map((activity) => {
+      activity.id === parseInt(e.target.id) && console.log(true);
+      return null;
+    });
+    console.log(e);
+  };
 
   return (
-    <div>
+    <>
+
       {
-      activities.data.map((activity) => (
-        activity.attributes.category_id === comparer && (
+      activities.map((activity) => (
+        activity.category_id === comparer && (
         <Activity
           key={activity.id}
-          title={activity.attributes.title}
+          title={activity.title}
+          complete={activity.complete}
+          buttonClick={buttonClick}
+          activityId={activity.id}
         />
         )
       ))
     }
-    <newActivity 
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-    />
-    </div>
+      <ActivityForm
+        handleChangeTitle={handleChangeTitle}
+        handleChangeReminder={handleChangeReminder}
+        handleSubmit={handleSubmit}
+      />
+    </>
   );
 };
 

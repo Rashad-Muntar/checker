@@ -17,11 +17,12 @@ const CategoryList = () => {
   return (
     <div>
       {
-        categoryData.data.map((category) => (
+        categoryData.map((category) => (
           <Link to={`/category/${category.id}`} key={category.id} className="a-card-wrapper">
             <Category
               key={category.id}
-              title={category.attributes.title}
+              title={category.title}
+              percentage={category.percentage}
             />
           </Link>
         ))
