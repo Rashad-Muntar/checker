@@ -57,19 +57,6 @@ const CategoryDetails = () => {
     setTitle('');
   };
 
-  // const updateActivity = () => {
-  //   try {
-  //     axios.post(`http://localhost:3000/api/categories/${comparer}/activities/`, {
-  //       complete: true,
-  //     })
-  //       .then((response) => {
-  //         setActivities([response.data, ...activities]);
-  //       });
-  //   } catch (error) {
-  //     return error.message;
-  //   }
-  // };
-
   const buttonClick = (e) => {
     activities.map((activity) => {
       activity.id === parseInt(e.target.id) && console.log(true);

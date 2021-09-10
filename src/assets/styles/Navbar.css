@@ -1,0 +1,11 @@
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background: rgb(175, 22, 22);
+    display: flex;
+    align-items: center;
+    height: 50px;
+    color: white;
+}
+
+.uk-navbar-nav>li>a {
+    color: white;
+}
