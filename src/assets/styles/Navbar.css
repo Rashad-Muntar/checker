@@ -1,11 +1,50 @@
-.uk-navbar-container:not(.uk-navbar-transparent) {
-    background: rgb(175, 22, 22);
-    display: flex;
-    align-items: center;
+nav{
+    background-color: rgb(124, 0, 124);
+    width: 100vw;
     height: 50px;
-    color: white;
 }
 
-.uk-navbar-nav>li>a {
+nav .content-wrapper{
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav .content-wrapper a{
     color: white;
+}
+nav .content-wrapper .name{
+    color: white;
+    margin-right: 20px;
+}
+
+nav .content-wrapper .right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: auto;
+}
+
+nav .content-wrapper .right a{
+    width: 70px;
+    text-align: right;
+}
+
+.logout{
+    background-color: transparent;
+    border: none;
+    color: rgb(255, 242, 242);
+    font-size: 1.1em;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.logout:focus{
+  outline: none;
 }

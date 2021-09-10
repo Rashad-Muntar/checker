@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { signInUserAction } from '../Actions';
@@ -34,7 +33,6 @@ const Login = () => {
       axios.post('http://localhost:3000/api/sign_in', logInUser, { withCredentials: true })
         .then((response) => {
           if (response.data.is_success) {
-          // handleSuccesfullAuth(response.data);
             dispatch(signInUserAction(response.data.data.user));
             localStorage.setItem('user', JSON.stringify(response.data.data.user));
             successLoginRedirect(response);

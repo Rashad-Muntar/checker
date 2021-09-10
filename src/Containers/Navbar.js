@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../assets/styles/Navbar.css';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLogoutAction } from '../Actions';
 
 const Navbar = () => {
   const user = useSelector((state) => state.userReducer);
@@ -9,10 +10,17 @@ const Navbar = () => {
   const [login, setLogin] = useState(null);
   const [signup, setSignup] = useState(null);
   const [logout, setLogout] = useState(null);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const logoutHandler = () => {
     console.log('Log out');
+    localStorage.removeItem('user');
+    history.push('/');
+    dispatch(setLogoutAction());
   };
+
+
   useEffect(() => {
     if (user.user) {
       setNavName(user.user.username);
@@ -27,38 +35,25 @@ const Navbar = () => {
     }
   });
   return (
-    <nav className="uk-navbar-container" uk-navbar>
-      <div className="uk-navbar-left">
-        <ul className="uk-navbar-nav">
-          <li className="nav-item"><Link to="/">dayTrack+</Link></li>
-        </ul>
-
-      </div>
-
-      <div className="uk-navbar-right">
-
-        <ul className="uk-navbar-nav">
-          <li>
-            <a href="https://getuikit.com/docs/navbar">
-              {
-            navName
-          }
-            </a>
-          </li>
+    <nav>
+      <div className="content-wrapper">
+        <div className="left"><Link to="/">dayTrack+</Link></div>
+        <div className="right">
+          <span className="name">{navName}</span>
           {
-            login != null && <li className="nav-item"><Link to="/login">{login}</Link></li>
+            login != null && <Link to="/login">{login}</Link>
           }
-          {signup != null && <li className="nav-item"><Link to="/signup">{signup}</Link></li> }
           {
-            logout != null && <li onClick={logoutHandler} className="nav-item"><a href="https://getuikit.com/docs/navbar">{logout}</a></li>
+          signup != null && <Link to="/signup">{signup}</Link>
           }
-        </ul>
 
+          {
+            logout != null && <button type="button" className="logout" onClick={logoutHandler}>{logout}</button>
+          }
+        </div>
       </div>
-
     </nav>
   );
 };
-
 
 export default Navbar;
