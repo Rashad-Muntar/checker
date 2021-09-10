@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 // import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { signUpUserAction } from '../Actions';
 
@@ -10,7 +10,7 @@ const Signup = () => {
 
   const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
-  // const history = useHistory();
+  const history = useHistory();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -22,11 +22,11 @@ const Signup = () => {
     console.log(e.target.value);
   };
 
-  // const successRegisterRedirect = (data) => {
-  //   if (data.status === 200) {
-  //     history.push('/user');
-  //   }
-  // };
+  const successRegisterRedirect = (data) => {
+    if (data.data.is_success) {
+      history.push('/user');
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,13 +42,12 @@ const Signup = () => {
     try {
       axios.post('http://localhost:3000/api/sign_up', newUser, { withCredentials: true })
         .then((response) => {
-          // if (response.data.status === 'created') {
+          if (response.data.is_success) {
           //   handleSuccesfullAuth(response.data);
-          // }
-          dispatch(signUpUserAction(response.data.data));
-          // localStorage.setItem('current_user',
-          // JSON.stringify({ ...response.data.user, logged_in: true }));
-          // successRegisterRedirect(response);
+            dispatch(signUpUserAction(response.data.data));
+            localStorage.setItem('user', JSON.stringify(response.data.data.user));
+            successRegisterRedirect(response);
+          }
         });
     } catch (error) {
       return error.message;

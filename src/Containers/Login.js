@@ -12,11 +12,10 @@ const Login = () => {
 
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);
-    console.log(e.target.value);
   };
 
   const successLoginRedirect = (data) => {
-    if (data.data.logged_in === true) {
+    if (data.data.is_success) {
       history.push('/user');
     }
   };
@@ -34,20 +33,16 @@ const Login = () => {
     try {
       axios.post('http://localhost:3000/api/sign_in', logInUser, { withCredentials: true })
         .then((response) => {
-          // if (response.data.logged_in) {
-          //   console.log(response);
-          //   console.log('succesfull');
-          //   handleSuccesfullAuth(response.data);
-          // }
-          dispatch(signInUserAction(response.data.data));
-          // localStorage.setItem('current_user', JSON.stringify
-          // ({ ...response.data.user, logged_in: true }));
-          successLoginRedirect(response);
+          if (response.data.is_success) {
+          // handleSuccesfullAuth(response.data);
+            dispatch(signInUserAction(response.data.data.user));
+            localStorage.setItem('user', JSON.stringify(response.data.data.user));
+            successLoginRedirect(response);
+          }
         });
     } catch (error) {
       return error.message;
     }
-    console.log(logInUser);
     setUserName('');
     return null;
   };
