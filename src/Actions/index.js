@@ -26,7 +26,7 @@ export const setLogoutAction = () => ({
 
 export const categoryFetcher = () => async (dispatch) => {
   try {
-    const response = await axios.get('http://localhost:3000/api/categories');
+    const response = await axios.get('http://localhost:3000/api/users//categories');
     const category = await response.data;
     dispatch(categoryAction(category));
   } catch (error) {

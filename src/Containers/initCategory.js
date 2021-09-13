@@ -21,12 +21,12 @@ const InitCategory = () => (
     </div>
     <div>
       <i className="chess king icon" />
-      <h3>Family</h3>
+      <h3>Reading</h3>
       <p>0%</p>
     </div>
     <div>
       <i className="chess king icon" />
-      <h3>Reading</h3>
+      <h3>Sleep</h3>
       <p>0%</p>
     </div>
     <div>

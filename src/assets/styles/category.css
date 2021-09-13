@@ -10,12 +10,13 @@
 .Cat-wrapper > div{
     width: 48%;
     border: 1px solid brown;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 7px 20px;
     transition: 300ms;
+    cursor: pointer;
 }
 .Cat-wrapper > div:hover{
     box-shadow: 0px 0px 5px 3px rgba(141,139,139,0.78);
@@ -29,6 +30,14 @@
     font-size: 2em;
 }
 
+.Cat-wrapper > div p{
+    border: 5px solid brown;
+    border-radius: 100%;
+    padding: 15px;
+    font-weight: 700;
+    font-size: 2em;
+}
+
 .Cat-wrapper i.icon, i.icons{
-    font-size: 2.3em;
+    font-size: 2.5em;
 } 

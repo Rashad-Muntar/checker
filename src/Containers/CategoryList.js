@@ -12,6 +12,9 @@ const CategoryList = () => {
   console.log(categoryData);
   const dispatch = useDispatch();
 
+  //   const createCategories = () => {
+
+  //   }
   useEffect(() => {
     dispatch(categoryFetcher());
   }, []);
