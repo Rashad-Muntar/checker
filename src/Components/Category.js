@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Category = ({ title, percentage }) => (
+const Category = ({ title, progress }) => (
   <div>
     <p>{title}</p>
-    <p>{percentage}</p>
+    <p>{progress}</p>
   </div>
 );
 
 Category.propTypes = {
   title: PropTypes.string.isRequired,
-  percentage: PropTypes.number.isRequired,
+  progress: PropTypes.number.isRequired,
 };
 
 export default Category;

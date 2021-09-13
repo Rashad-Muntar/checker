@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { signUpUserAction } from '../Actions';
@@ -61,10 +60,5 @@ const Signup = () => {
     </form>
   );
 };
-
-// Signup.propTypes = {
-//   handleSuccesfullAuth: PropTypes.func.isRequired,
-
-// };
 
 export default Signup;
