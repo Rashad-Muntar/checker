@@ -34,16 +34,13 @@ const Signup = () => {
       user: {
         email,
         username: userName,
-        password: '123456',
-        password_confirmation: '123456',
       },
     };
 
     try {
-      axios.post('http://localhost:3000/api/sign_up', newUser, { withCredentials: true })
+      axios.post('http://localhost:3000/api/signup', newUser, { withCredentials: true })
         .then((response) => {
           if (response.data.is_success) {
-          //   handleSuccesfullAuth(response.data);
             dispatch(signUpUserAction(response.data.data));
             localStorage.setItem('user', JSON.stringify(response.data.data.user));
             successRegisterRedirect(response);

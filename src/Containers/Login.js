@@ -11,10 +11,11 @@ const Login = () => {
 
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);
+    console.log(e.target.value);
   };
 
   const successLoginRedirect = (data) => {
-    if (data.data.is_success) {
+    if (data.data.statues === 'signed_in') {
       history.push('/user');
     }
   };
@@ -22,21 +23,18 @@ const Login = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const logInUser = {
-      user: {
-        username: userName,
-        password: '123456',
-      },
-
+      username: userName,
     };
 
     try {
-      axios.post('http://localhost:3000/api/sign_in', logInUser, { withCredentials: true })
+      axios.post('http://localhost:3000/api/login', logInUser, { withCredentials: true })
         .then((response) => {
-          if (response.data.is_success) {
-            dispatch(signInUserAction(response.data.data.user));
-            localStorage.setItem('user', JSON.stringify(response.data.data.user));
-            successLoginRedirect(response);
-          }
+          // if (response.data.is_success) {
+          dispatch(signInUserAction(response.data));
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          successLoginRedirect(response);
+          console.log(response.data);
+          // }
         });
     } catch (error) {
       return error.message;
