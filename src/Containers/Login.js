@@ -15,7 +15,7 @@ const Login = () => {
   };
 
   const successLoginRedirect = (data) => {
-    if (data.data.statues === 'signed_in') {
+    if (data.data.status === 'signed_in') {
       history.push('/user');
     }
   };
