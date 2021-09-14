@@ -27,62 +27,6 @@ const Signup = () => {
     }
   };
 
-  // const createCategories = (id) => {
-  //   console.log(id);
-  //   try {
-  //     axios.post(`http://localhost:3000/api/users/${id}/categories`)
-  //       .then((response) => {
-  //         if (response.data.status === 'created') {
-  //           const categories = response.data.data.relationships.categories.data.length;
-  //           if (categories < 1) {
-  //             const newCat = {
-  //               user_id: `${id}`,
-  //               title: 'Exercise',
-  //               progress: 0,
-  // {
-  //   user_id: `${id}`,
-  //   title: 'Work',
-  //   progress: 0,
-  // },
-  // {
-  //   user_id: `${id}`,
-  //   title: 'Diet',
-  //   progress: 0,
-  // },
-
-  // {
-  //   user_id: `${id}`,
-  //   title: 'Read',
-  //   progress: 0,
-  // },
-
-  // {
-  //   user_id: `${id}`,
-  //   title: 'Sleep',
-  //   progress: 0,
-  // },
-  // {
-  //   user_id: `${id}`,
-  //   title: 'Social',
-  //   progress: 0,
-  // },
-
-  //             };
-  //             try {
-  //               axios.post(`http://localhost:3000/api/users/${id}/categories`, newCat);
-  //             } catch (error) {
-  //               return error.message;
-  //             }
-  //           }
-  //         }
-  //         return null;
-  //       });
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  //   return null;
-  // };
-
   const createCategories = (id) => {
     const categories = {
       categories: [
@@ -142,7 +86,6 @@ const Signup = () => {
             localStorage.setItem('user', JSON.stringify(response.data.user));
             successRegisterRedirect(response);
             createCategories(response.data.user.id);
-            // console.log(response.data.user.id);
           }
         });
     } catch (error) {
