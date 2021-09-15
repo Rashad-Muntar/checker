@@ -1,14 +1,15 @@
 import React from 'react';
-import '../assets/styles/category.css'
+import '../assets/styles/category.css';
 import PropTypes from 'prop-types';
 
 const Category = ({ title, progress }) => (
-  <div className="Cat-wrapper">
-    <div>
+  <div className="body">
     <i className="chess king icon" />
-      <h3>{title}</h3>
-      <p>% {progress}</p>
-    </div>
+    <h3>{title}</h3>
+    <p>
+      %
+      {progress}
+    </p>
   </div>
 );
 

@@ -25,12 +25,15 @@ export const setLogoutAction = () => ({
 });
 
 export const categoryFetcher = () => async (dispatch) => {
-  try {
-    const response = await axios.get('http://localhost:3000/api/users//categories');
-    const category = await response.data;
-    dispatch(categoryAction(category));
-  } catch (error) {
-    return error.message;
+  if (localStorage.getItem('user') != null) {
+    const localUser = JSON.parse(localStorage.getItem('user'));
+    try {
+      const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}`);
+      const category = await response.data;
+      dispatch(categoryAction(category));
+    } catch (error) {
+      return error.message;
+    }
   }
   return null;
 };

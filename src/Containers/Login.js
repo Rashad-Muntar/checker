@@ -16,7 +16,7 @@ const Login = () => {
 
   const successLoginRedirect = (data) => {
     if (data.data.status === 'signed_in') {
-      history.push('/user');
+      history.push('/');
     }
   };
 

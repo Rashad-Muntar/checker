@@ -23,13 +23,18 @@ const Signup = () => {
 
   const successRegisterRedirect = (data) => {
     if (data.data.status === 'created') {
-      history.push('/user');
+      history.push('/');
     }
   };
 
   const createCategories = (id) => {
     const categories = {
       categories: [
+        {
+          user_id: `${id}`,
+          title: 'Exercise',
+          progress: 0,
+        },
         {
           user_id: `${id}`,
           title: 'Work',

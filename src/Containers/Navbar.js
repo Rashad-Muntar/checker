@@ -25,7 +25,6 @@ const Navbar = () => {
       setLogin('Login');
       setLogout('');
     }
-    console.log('nav logic triggered');
   };
 
   const logoutHandler = () => {

@@ -7,7 +7,7 @@
     margin-top: 70px;
 }
 
-.Cat-wrapper > div{
+.Cat-wrapper > .body{
     width: 48%;
     border: 1px solid brown;
     margin-bottom: 40px;
@@ -18,19 +18,19 @@
     transition: 300ms;
     cursor: pointer;
 }
-.Cat-wrapper > div:hover{
+.Cat-wrapper > .body:hover{
     box-shadow: 0px 0px 5px 3px rgba(141,139,139,0.78);
 -webkit-box-shadow: 0px 0px 5px 3px rgba(141,139,139,0.78);
 -moz-box-shadow: 0px 0px 5px 3px rgba(141,139,139,0.78);
 }
 
-.Cat-wrapper > div h3{
+.Cat-wrapper > .body h3{
     color: brown;
     font-weight: 700;
     font-size: 2em;
 }
 
-.Cat-wrapper > div p{
+.Cat-wrapper > .body p{
     border: 5px solid brown;
     border-radius: 100%;
     padding: 15px;

@@ -16,11 +16,8 @@ function App() {
     if (localStorage.getItem('user') != null) {
       const localUser = JSON.parse(localStorage.getItem('user'));
       dispatch(signInUserAction(localUser));
+      console.log(localUser);
     }
-  };
-
-  const handleSuccesfullAuth = (data) => {
-    console.log(data);
   };
 
   useEffect(() => {
@@ -34,27 +31,9 @@ function App() {
       <Switch>
         <Route path="/" component={CategoryList} exact />
         <Route path="/category/:id" component={CategoryDetails} exact />
-        <Route
-          path="/signup"
-          render={() => (
-            <Signup handleSuccesfullAuth={handleSuccesfullAuth} />
-          )}
-          exact
-        />
-        <Route
-          path="/login"
-          render={() => (
-            <Login handleSuccesfullAuth={handleSuccesfullAuth} />
-          )}
-          exact
-        />
-        <Route
-          path="/user"
-          render={() => (
-            <UserPage />
-          )}
-          exact
-        />
+        <Route path="/signup" component={Signup} exact />
+        <Route path="/login" component={Login} exact />
+        <Route path="/user" component={UserPage} exact />
       </Switch>
     </>
   );
