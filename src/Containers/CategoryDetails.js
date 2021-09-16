@@ -11,14 +11,12 @@ const CategoryDetails = () => {
   const localUser = JSON.parse(localStorage.getItem('user'));
   const id = useParams();
   const comparer = parseInt(id.id);
-  console.log(comparer);
 
   const getActivitties = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`);
       const returnData = response.data.activities;
       setActivities(returnData);
-      console.log(response.data.activities);
     } catch (error) {
       return error.message;
     }
@@ -55,10 +53,10 @@ const CategoryDetails = () => {
 
   const buttonClick = (e) => {
     activities.map((activity) => {
+      console.log(e.target);
       activity.id === parseInt(e.target.id) && console.log(true);
       return null;
     });
-    console.log(e);
   };
 
   return (
@@ -71,6 +69,7 @@ const CategoryDetails = () => {
         <Activity
           key={activity.id}
           title={activity.title}
+          timer={activity.timer}
           complete={activity.complete}
           buttonClick={buttonClick}
           activityId={activity.id}

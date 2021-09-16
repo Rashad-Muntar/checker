@@ -7,8 +7,9 @@ const Category = ({ title, progress }) => (
     <i className="chess king icon" />
     <h3>{title}</h3>
     <p>
-      %
+
       {progress}
+      hrs.
     </p>
   </div>
 );

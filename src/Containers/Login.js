@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { signInUserAction } from '../Actions';
+import '../assets/styles/Form.css';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
@@ -44,7 +45,7 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleLoginSubmit}>
+    <form onSubmit={handleLoginSubmit} className="form">
       <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} />
       <button type="submit">Login</button>
     </form>

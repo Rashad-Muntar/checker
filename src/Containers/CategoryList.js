@@ -24,7 +24,7 @@ const CategoryList = () => {
             <Category
               key={category.id}
               title={category.attributes.title}
-              percentage={category.attributes.progress}
+              progress={category.attributes.progress}
             />
           </Link>
         ))
