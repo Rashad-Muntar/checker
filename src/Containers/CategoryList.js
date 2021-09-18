@@ -9,6 +9,7 @@ const CategoryList = () => {
   const user = useSelector((state) => state.userReducer);
   const categoryData = useSelector((state) => state.categoryReducer.data);
   const dispatch = useDispatch();
+  const localUser = JSON.parse(localStorage.getItem('user'));
   console.log(categoryData);
 
   useEffect(() => {
@@ -19,14 +20,18 @@ const CategoryList = () => {
     <div className="Cat-wrapper">
 
       {user.user
-        ? categoryData.included && (categoryData.included.map((category) => (
+        ? (categoryData.map((category) => (
+          category.user_id === localUser.id
+          && (
           <Link to={`/category/${category.id}`} key={category.id}>
             <Category
               key={category.id}
-              title={category.attributes.title}
-              progress={category.attributes.progress}
+              title={category.title}
+              hour={category.hour}
+              minute={category.minute}
             />
           </Link>
+          )
         ))
         )
         : <InitCategory />}

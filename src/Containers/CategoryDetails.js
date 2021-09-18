@@ -1,4 +1,4 @@
-/* eslint-disable radix, consistent-return, no-unused-expressions */
+/* eslint-disable radix */
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
@@ -49,14 +49,11 @@ const CategoryDetails = () => {
       return error.message;
     }
     setTitle('');
+    return null;
   };
 
-  const buttonClick = (e) => {
-    activities.map((activity) => {
-      console.log(e.target);
-      activity.id === parseInt(e.target.id) && console.log(true);
-      return null;
-    });
+  const buttonClick = () => {
+    console.log('clicked');
   };
 
   return (

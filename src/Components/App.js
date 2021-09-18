@@ -16,7 +16,6 @@ function App() {
     if (localStorage.getItem('user') != null) {
       const localUser = JSON.parse(localStorage.getItem('user'));
       dispatch(signInUserAction(localUser));
-      console.log(localUser);
     }
   };
 
