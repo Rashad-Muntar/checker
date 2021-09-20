@@ -43,17 +43,12 @@ const CategoryDetails = () => {
       axios.post(`http://localhost:3000//api/users/${localUser.id}/categories/${comparer}/activities`, activityData)
         .then((response) => {
           setActivities([response.data.activity, ...activities]);
-          console.log(response.data.activity);
         });
     } catch (error) {
       return error.message;
     }
     setTitle('');
     return null;
-  };
-
-  const buttonClick = () => {
-    console.log('clicked');
   };
 
   return (
@@ -68,7 +63,6 @@ const CategoryDetails = () => {
           title={activity.title}
           timer={activity.timer}
           complete={activity.complete}
-          buttonClick={buttonClick}
           activityId={activity.id}
         />
         )

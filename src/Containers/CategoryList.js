@@ -10,7 +10,6 @@ const CategoryList = () => {
   const categoryData = useSelector((state) => state.categoryReducer.data);
   const dispatch = useDispatch();
   const localUser = JSON.parse(localStorage.getItem('user'));
-  console.log(categoryData);
 
   useEffect(() => {
     dispatch(categoryFetcher());
@@ -19,7 +18,7 @@ const CategoryList = () => {
   return (
     <div className="Cat-wrapper">
 
-      {user.user
+      {user.user && localUser
         ? (categoryData.map((category) => (
           category.user_id === localUser.id
           && (

@@ -14,12 +14,10 @@ const Signup = () => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);
-    console.log(e.target.value);
   };
 
   const successRegisterRedirect = (data) => {
@@ -66,10 +64,7 @@ const Signup = () => {
       ],
     };
     try {
-      axios.post(`http://localhost:3000/api/users/${id}/categories`, categories)
-        .then((response) => {
-          console.log(response);
-        });
+      axios.post(`http://localhost:3000/api/users/${id}/categories`, categories);
     } catch (error) {
       return error.message;
     }
@@ -88,8 +83,8 @@ const Signup = () => {
       axios.post('http://localhost:3000/api/signup', newUser, { withCredentials: true })
         .then((response) => {
           if (response.data.status === 'created') {
-            dispatch(signUpUserAction(response.data.data));
-            localStorage.setItem('user', JSON.stringify(response.data.user));
+            dispatch(signUpUserAction({ ...response.data.data, loggedIn: true }));
+            localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
             successRegisterRedirect(response);
             createCategories(response.data.user.id);
           }

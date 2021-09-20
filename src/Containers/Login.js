@@ -12,7 +12,6 @@ const Login = () => {
 
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);
-    console.log(e.target.value);
   };
 
   const successLoginRedirect = (data) => {
@@ -31,10 +30,9 @@ const Login = () => {
       axios.post('http://localhost:3000/api/login', logInUser, { withCredentials: true })
         .then((response) => {
           // if (response.data.is_success) {
-          dispatch(signInUserAction(response.data));
-          localStorage.setItem('user', JSON.stringify(response.data.user));
+          dispatch(signInUserAction({ ...response.data, loggedIn: true }));
+          localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
           successLoginRedirect(response);
-          console.log(response.data);
           // }
         });
     } catch (error) {
@@ -52,8 +50,4 @@ const Login = () => {
   );
 };
 
-// Login.propTypes = {
-//   handleSuccesfullAuth: PropTypes.func.isRequired,
-
-// };
 export default Login;

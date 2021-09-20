@@ -6,7 +6,7 @@ import CategoryDetails from '../Containers/CategoryDetails';
 import Signup from '../Containers/SignUp';
 import Login from '../Containers/Login';
 import UserPage from '../Containers/userPage';
-import { signInUserAction } from '../Actions';
+import { signInUserAction, setLogoutAction } from '../Actions';
 import Navbar from '../Containers/Navbar';
 
 function App() {
@@ -15,7 +15,10 @@ function App() {
   const checkUser = () => {
     if (localStorage.getItem('user') != null) {
       const localUser = JSON.parse(localStorage.getItem('user'));
-      dispatch(signInUserAction(localUser));
+      dispatch(signInUserAction({ ...localUser, loggedIn: true }));
+    } else {
+      localStorage.removeItem('user');
+      dispatch(setLogoutAction());
     }
   };
 

@@ -8,20 +8,14 @@ const Activity = ({
   activityId,
   title,
   complete,
-  buttonClick,
 }) => {
   const [timerOn, setTimerOn] = useState(false);
   const [second, setSecond] = useState(0);
   const [minute, setMinute] = useState(0);
   const [hour, setHour] = useState(0);
-  const [newTitle, setNewTitle] = useState(title);
   const id = useParams();
   const comparer = parseInt(id.id);
   const localUser = JSON.parse(localStorage.getItem('user'));
-
-  const titleChangeandler = () => {
-    setNewTitle('title chnageed');
-  };
 
   useEffect(() => {
     if (second === 59) {
@@ -41,23 +35,17 @@ const Activity = ({
     try {
       axios.get(`http://localhost:3000/api/users/${localUser.id}/categories`)
         .then((response) => {
-          console.log(response.data);
           response.data.map((cat) => {
             if (cat.user_id === localUser.id && cat.id === comparer) {
               let newHour = cat.hour;
               let newMinute = cat.minute;
               newHour += hour;
               newMinute += minute;
-              console.log(newHour);
-              console.log(newMinute);
               const upData = {
                 hour: newHour,
                 minute: newMinute,
               };
-              axios.put(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}`, upData)
-                .then((res) => {
-                  console.log(res.data);
-                });
+              axios.put(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}`, upData);
             }
             return null;
           });
@@ -88,7 +76,7 @@ const Activity = ({
 
   return (
     <div>
-      <p>{newTitle}</p>
+      <p>{title}</p>
       <div>
         <span>
           {hour}
@@ -111,13 +99,12 @@ const Activity = ({
       </div>
       { complete === false ? (
         <>
-          <button id={activityId} onClick={buttonClick} type="button">Not complete</button>
+          <span id={activityId}>Not complete</span>
           <button id={activityId} onClick={() => setTimerOn(true)} type="button">Start timer</button>
           <button id={activityId} onClick={updateTimerhandler} type="button">Stop timer</button>
-          <button onClick={titleChangeandler} type="button">Change title</button>
         </>
       ) : (
-        <button id={activityId} onClick={buttonClick} type="button">Complete</button>
+        <span id={activityId}>Complete</span>
 
       )}
     </div>
@@ -127,7 +114,6 @@ const Activity = ({
 Activity.propTypes = {
   title: PropTypes.string.isRequired,
   complete: PropTypes.bool.isRequired,
-  buttonClick: PropTypes.func.isRequired,
   activityId: PropTypes.number.isRequired,
 
 };
