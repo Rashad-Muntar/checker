@@ -32,6 +32,7 @@ const Navbar = () => {
           {user.user && user.user.loggedIn === true
             ? (
               <>
+                {}
                 <span className="name">{user.user.username}</span>
                 <button type="button" className="logout" onClick={logoutHandler}>Logout</button>
               </>

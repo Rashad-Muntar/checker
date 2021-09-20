@@ -40,4 +40,57 @@
 
 .Cat-wrapper i.icon, i.icons{
     font-size: 2.5em;
-} 
+}
+
+.Cat-wrapper a{
+    border: 2px solid white;
+    width: 48%;
+    margin-bottom: 30px;
+    border-radius: 50px;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    position: static;
+    transition: 300ms;
+}
+
+.Cat-wrapper a:hover{
+    width: 48.3%;
+    box-shadow: 0px 0px 5px 3px rgba(148, 148, 148, 0.78);
+-webkit-box-shadow: 0px 0px 5px 3px rgba(141,139,139,0.78);
+-moz-box-shadow: 0px 0px 5px 3px rgba(141,139,139,0.78);
+}
+
+.Cat-wrapper a .card-wrapper{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.Cat-wrapper a .card-wrapper h3{
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.Cat-wrapper a .card-wrapper span {
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+.Cat-wrapper a .card-wrapper .timer-area {
+   border-left: 1px solid white;
+   border-right: 1px solid white;
+   padding: 0 7px;
+}
+
+@media screen and (max-width: 460px) {
+    .Cat-wrapper a{
+        width: 100%;
+    }
+
+    .Cat-wrapper {
+        width: 95%;
+    }
+}
