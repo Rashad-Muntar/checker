@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import '../assets/styles/Activity.css';
 
 const Activity = ({
   activityId,
@@ -75,37 +76,34 @@ const Activity = ({
   }, [timerOn]);
 
   return (
-    <div>
-      <p>{title}</p>
+    <div className="activity-wrapper">
+      {complete === false ? <p className="title Notcomplete">{title}</p> : <p className="title complete">{title}</p>}
+
       <div>
         <span>
           {hour}
-          hr.
+          hr
           {' '}
           :
           {' '}
         </span>
         <span>
           {minute}
-          min.
+          min
           {' '}
           :
           {' '}
         </span>
         <span>
           {second}
-          sec.
+          sec
         </span>
       </div>
-      { complete === false ? (
+      { complete === false && (
         <>
-          <span id={activityId}>Not complete</span>
           <button id={activityId} onClick={() => setTimerOn(true)} type="button">Start timer</button>
           <button id={activityId} onClick={updateTimerhandler} type="button">Stop timer</button>
         </>
-      ) : (
-        <span id={activityId}>Complete</span>
-
       )}
     </div>
   );

@@ -98,15 +98,18 @@ const Signup = () => {
 
   return (
     <div className="form-wrapper">
+      <i className="clock outline icon" />
+      <p>Sign up</p>
+      <small>Create an account with easily and track your daily activities</small>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} />
-        <input type="email" placeholder="Enter your email" onChange={handleEmailChange} />
+        <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} required />
+        <input type="email" placeholder="Enter your email" onChange={handleEmailChange} required />
         <button type="submit">Sign up</button>
+        <span>
+          Already have an account?
+          <Link to="/login"> Log in</Link>
+        </span>
       </form>
-      <span>
-        Already have an account?
-        <Link to="/login">Log in</Link>
-      </span>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import CategoryList from '../Containers/CategoryList';
 import CategoryDetails from '../Containers/CategoryDetails';
 import Signup from '../Containers/SignUp';
@@ -12,7 +12,8 @@ import Footer from './Footer';
 
 function App() {
   const dispatch = useDispatch();
-
+  const history = useHistory();
+  
   const checkUser = () => {
     if (localStorage.getItem('user') != null) {
       const localUser = JSON.parse(localStorage.getItem('user'));
@@ -23,6 +24,17 @@ function App() {
     }
   };
 
+  const logoutHandler = () => {
+    axios.delete('http://localhost:3000/api/logout', {
+      withCredentials: true,
+    })
+      .then(() => {
+        localStorage.removeItem('user');
+        dispatch(setLogoutAction());
+        history.push('/');
+      });
+  };
+
   useEffect(() => {
     checkUser();
   }, []);
@@ -30,7 +42,7 @@ function App() {
   return (
     <>
 
-      <Navbar />
+      <Navbar logoutHandler={logoutHandler} />
 
       <Switch>
         <Route path="/" component={CategoryList} exact />
@@ -39,7 +51,7 @@ function App() {
         <Route path="/login" component={Login} exact />
         <Route path="/user" component={UserPage} exact />
       </Switch>
-      <Footer />
+      <Footer logoutHandler={logoutHandler} />
     </>
   );
 }

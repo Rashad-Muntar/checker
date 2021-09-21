@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import Activity from '../Components/Activity';
 import ActivityForm from './ActivityForm';
+import '../assets/styles/DetailsPage.css';
 
 const CategoryDetails = () => {
   const [activities, setActivities] = useState([]);
@@ -52,27 +53,28 @@ const CategoryDetails = () => {
   };
 
   return (
-    <>
-
-      {
+    <div className="details-page-wrapper">
+      <div className="Activity-main-wrapper">
+        {
       activities.length !== 0 && activities.map((activity) => (
         activity.category_id === comparer
         && (
-        <Activity
-          key={activity.id}
-          title={activity.title}
-          timer={activity.timer}
-          complete={activity.complete}
-          activityId={activity.id}
-        />
+          <Activity
+            key={activity.id}
+            title={activity.title}
+            timer={activity.timer}
+            complete={activity.complete}
+            activityId={activity.id}
+          />
         )
       ))
     }
+      </div>
       <ActivityForm
         handleChangeTitle={handleChangeTitle}
         handleSubmit={handleSubmit}
       />
-    </>
+    </div>
   );
 };
 
