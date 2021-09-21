@@ -1,15 +1,12 @@
 import React from 'react';
-import axios from 'axios';
 import '../assets/styles/Navbar.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const Navbar = ({logoutHandler}) => {
+const Navbar = ({ logoutHandler }) => {
   const user = useSelector((state) => state.userReducer);
   console.log(user);
- 
-  
-  // const localUser = JSON.parse(localStorage.getItem('user'));
 
   return (
     <nav>
@@ -36,6 +33,10 @@ const Navbar = ({logoutHandler}) => {
       </div>
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  logoutHandler: PropTypes.func.isRequired,
 };
 
 export default Navbar;

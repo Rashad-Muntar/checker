@@ -25,6 +25,18 @@ footer a{
     font-size: 1.3em;
     transition: 300ms;
 }
+
+footer button{
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(75, 61, 75);
+    width: 100%;
+    color: white;
+    font-size: 1.3em;
+    transition: 300ms;
+}
 footer a:hover{
     color: rgb(199, 180, 180);
 }

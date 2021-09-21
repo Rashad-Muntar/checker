@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import CategoryList from '../Containers/CategoryList';
 import CategoryDetails from '../Containers/CategoryDetails';
@@ -13,7 +14,7 @@ import Footer from './Footer';
 function App() {
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
   const checkUser = () => {
     if (localStorage.getItem('user') != null) {
       const localUser = JSON.parse(localStorage.getItem('user'));
