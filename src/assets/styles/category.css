@@ -92,5 +92,10 @@
 
     .Cat-wrapper {
         width: 95%;
+        margin-bottom: 300px;
+    }
+
+    .Cat-wrapper > .body{
+        width: 100%;
     }
 }

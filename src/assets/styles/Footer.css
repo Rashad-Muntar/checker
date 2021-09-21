@@ -1,0 +1,43 @@
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 80px;
+    width: 100%;
+    color:#FFFFFF; 
+    background: #3a062d;
+    font-size:1.5em;
+    text-align: center;
+    line-height:100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer a{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(75, 61, 75);
+    width: 100%;
+    color: white;
+    font-size: 1.3em;
+    transition: 300ms;
+}
+footer a:hover{
+    color: rgb(199, 180, 180);
+}
+
+i.icon{
+    height: auto;
+}
+
+@media screen and (max-width: 460px) {
+    footer span{
+        font-size: 0.7em;
+    }
+    footer{
+        margin-top: 300px;
+    }
+}

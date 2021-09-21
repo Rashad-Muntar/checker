@@ -1,6 +1,6 @@
 nav{
-    background-color: rgb(124, 0, 124);
-    width: 100vw;
+    background-color: #3a062d;
+    width: 100%;
     height: 50px;
 }
 
@@ -11,6 +11,11 @@ nav .content-wrapper{
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+nav i.icon.user.outline{
+  color: white;
+  font-size: 1.5em;
 }
 
 nav .content-wrapper a{

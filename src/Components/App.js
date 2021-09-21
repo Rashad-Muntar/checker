@@ -8,6 +8,7 @@ import Login from '../Containers/Login';
 import UserPage from '../Containers/userPage';
 import { signInUserAction, setLogoutAction } from '../Actions';
 import Navbar from '../Containers/Navbar';
+import Footer from './Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
         <Route path="/login" component={Login} exact />
         <Route path="/user" component={UserPage} exact />
       </Switch>
+      <Footer />
     </>
   );
 }

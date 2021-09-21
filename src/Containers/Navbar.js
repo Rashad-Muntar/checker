@@ -35,6 +35,7 @@ const Navbar = () => {
             ? (
               <>
                 {}
+                <i className="user outline icon" />
                 <span className="name">{user.user.username}</span>
                 <button type="button" className="logout" onClick={logoutHandler}>Logout</button>
               </>
