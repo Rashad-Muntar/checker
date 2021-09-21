@@ -25,6 +25,8 @@ const Navbar = () => {
 
   return (
     <nav>
+
+      <div />
       <div className="content-wrapper">
         <div className="left"><Link to="/">dayTrack+</Link></div>
         <div className="right">

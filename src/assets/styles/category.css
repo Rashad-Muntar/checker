@@ -9,7 +9,7 @@
 
 .Cat-wrapper > .body{
     width: 48%;
-    border: 1px solid brown;
+    border: 1px solid rgb(255, 255, 255);
     margin-bottom: 40px;
     display: flex;
     justify-content: space-between;
@@ -17,6 +17,8 @@
     padding: 7px 20px;
     transition: 300ms;
     cursor: pointer;
+    border-radius: 50px;
+    color: white;
 }
 .Cat-wrapper > .body:hover{
     box-shadow: 0px 0px 5px 3px rgba(141,139,139,0.78);
@@ -25,17 +27,15 @@
 }
 
 .Cat-wrapper > .body h3{
-    color: brown;
+    color: rgb(250, 250, 250);
     font-weight: 700;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .Cat-wrapper > .body p{
-    border: 5px solid brown;
-    border-radius: 100%;
     padding: 15px;
     font-weight: 700;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .Cat-wrapper i.icon, i.icons{

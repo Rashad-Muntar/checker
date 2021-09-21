@@ -24,7 +24,7 @@ const Category = ({
     {
         title === 'Work' && <i className="briefcase icon" />
       }
-    <h3>{title}</h3>
+    <span>{title}</span>
     <div className="timer-area">
       <span>
         {hour}
