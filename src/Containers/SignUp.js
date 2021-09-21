@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../assets/styles/Form.css';
 import { signUpUserAction } from '../Actions';
@@ -97,11 +97,17 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
-      <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} />
-      <input type="email" placeholder="Enter your email" onChange={handleEmailChange} />
-      <button type="submit">Sign up</button>
-    </form>
+    <div className="form-wrapper">
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} />
+        <input type="email" placeholder="Enter your email" onChange={handleEmailChange} />
+        <button type="submit">Sign up</button>
+      </form>
+      <span>
+        Already have an account?
+        <Link to="/login">Log in</Link>
+      </span>
+    </div>
   );
 };
 

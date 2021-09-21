@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { categoryFetcher } from '../Actions/index';
 import InitCategory from '../Components/initCategory';
 import Category from '../Components/Category';
+import '../assets/styles/category.css';
 
 const CategoryList = () => {
   const user = useSelector((state) => state.userReducer);
@@ -16,7 +17,7 @@ const CategoryList = () => {
   }, []);
 
   return (
-    <div className="Cat-wrapper">
+    <section className="Cat-wrapper">
 
       {user.user && localUser
         ? (categoryData.map((category) => (
@@ -34,7 +35,7 @@ const CategoryList = () => {
         ))
         )
         : <InitCategory />}
-    </div>
+    </section>
   );
 };
 

@@ -3,35 +3,59 @@ import '../assets/styles/category.css';
 
 const InitCategory = () => (
   <>
-    <Link className="body" to="/login">
-      <i className="futbol outline icon" />
-      <h3>Exercise</h3>
-      <p>0hr : 0min</p>
+    <Link to="/login">
+      <div className="card-wrapper">
+        <i className="futbol outline icon" />
+        <span>Exercise</span>
+        <div className="timer-area">
+          <span>0hr : 0min</span>
+        </div>
+      </div>
     </Link>
     <Link className="body" to="/login">
-      <i className="utensils icon" />
-      <h3>Diet</h3>
-      <p>0hr : 0min</p>
+      <div className="card-wrapper">
+        <i className="utensils icon" />
+        <span>Diet</span>
+        <div className="timer-area">
+          <span>0hr : 0min</span>
+        </div>
+      </div>
     </Link>
     <Link className="body" to="/login">
-      <i className="briefcase icon" />
-      <h3>Work</h3>
-      <p>0hr : 0min</p>
+      <div className="card-wrapper">
+        <i className="briefcase icon" />
+        <span>Work</span>
+        <div className="timer-area">
+          <span>0hr : 0min</span>
+        </div>
+      </div>
     </Link>
     <Link className="body" to="/login">
-      <i className="book icon" />
-      <h3>Reading</h3>
-      <p>0hr : 0min</p>
+      <div className="card-wrapper">
+        <i className="book icon" />
+        <span>Reading</span>
+        <div className="timer-area">
+          <span>0hr : 0min</span>
+        </div>
+      </div>
     </Link>
     <Link className="body" to="/login">
-      <i className="bed icon" />
-      <h3>Sleep</h3>
-      <p>0hr : 0min</p>
+      <div className="card-wrapper">
+        <i className="bed icon" />
+        <span>Sleep</span>
+        <div className="timer-area">
+          <span>0hr : 0min</span>
+        </div>
+      </div>
     </Link>
     <Link className="body" to="/login">
-      <i className="users icon" />
-      <h3>Social</h3>
-      <p>0hr : 0min</p>
+      <div className="card-wrapper">
+        <i className="users icon" />
+        <span>Social</span>
+        <div className="timer-area">
+          <span>0hr : 0min</span>
+        </div>
+      </div>
     </Link>
   </>
 );
