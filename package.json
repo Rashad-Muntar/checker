@@ -25,9 +25,9 @@
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "stylelint-config-standard": "21.x",
+    "stylelint-config-standard": "20.0.x",
     "stylelint-csstree-validator": "1.x",
-    "stylelint-scss": "3.x",
+    "stylelint-scss": "3.17.x",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -53,5 +53,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-jest": "^27.2.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "jest-cli": "^27.2.1",
+    "react-addons-test-utils": "^15.6.2",
+    "react-test-renderer": "^17.0.2",
+    "redux-mock-store": "^1.5.4",
+    "sinon": "^11.1.2"
   }
 }
