@@ -27,12 +27,11 @@ const Login = () => {
     };
 
     try {
-      axios.post('https://dry-atoll-78054.herokuapp.com/api/login', logInUser, { withCredentials: true })
+      axios.post('http://localhost:3000/api/login', logInUser, { withCredentials: true })
         .then((response) => {
           dispatch(signInUserAction({ ...response.data, loggedIn: true }));
           localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
           successLoginRedirect(response);
-          // }
         });
     } catch (error) {
       return error.message;

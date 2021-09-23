@@ -28,7 +28,7 @@ export const categoryFetcher = () => async (dispatch) => {
   if (localStorage.getItem('user') != null) {
     const localUser = JSON.parse(localStorage.getItem('user'));
     try {
-      const response = await axios.get(`https://dry-atoll-78054.herokuapp.com/api/users/${localUser.id}/categories`);
+      const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories`);
       const category = await response.data;
       dispatch(categoryAction(category));
     } catch (error) {

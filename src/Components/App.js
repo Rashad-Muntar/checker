@@ -29,7 +29,7 @@ function App() {
   };
 
   const logoutHandler = () => {
-    axios.delete('https://dry-atoll-78054.herokuapp.com/api/logout', {
+    axios.delete('http://localhost:3000/api/logout', {
       withCredentials: true,
     })
       .then(() => {
