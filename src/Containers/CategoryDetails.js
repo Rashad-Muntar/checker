@@ -15,7 +15,7 @@ const CategoryDetails = () => {
 
   const getActivitties = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`);
+      const response = await axios.get(`https://dry-atoll-78054.herokuapp.com/api/users/${localUser.id}/categories/${comparer}/activities`);
       const returnData = response.data.activities;
       setActivities(returnData);
     } catch (error) {
@@ -41,7 +41,7 @@ const CategoryDetails = () => {
     };
 
     try {
-      axios.post(`http://localhost:3001/api/users/${localUser.id}/categories/${comparer}/activities`, activityData)
+      axios.post(`https://dry-atoll-78054.herokuapp.com/api/users/${localUser.id}/categories/${comparer}/activities`, activityData)
         .then((response) => {
           setActivities([response.data.activity, ...activities]);
         });
