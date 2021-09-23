@@ -64,7 +64,7 @@ const Signup = () => {
       ],
     };
     try {
-      axios.post(`http://localhost:3000/api/users/${id}/categories`, categories);
+      axios.post(`https://dry-atoll-78054.herokuapp.com/api/users/${id}/categories`, categories);
     } catch (error) {
       return error.message;
     }
@@ -80,7 +80,7 @@ const Signup = () => {
       },
     };
     try {
-      axios.post('http://localhost:3000/api/signup', newUser, { withCredentials: true })
+      axios.post('https://dry-atoll-78054.herokuapp.com/api/signup', newUser, { withCredentials: true })
         .then((response) => {
           if (response.data.status === 'created') {
             dispatch(signUpUserAction({ ...response.data.data, loggedIn: true }));

@@ -14,8 +14,17 @@ const ActivityForm = ({ handleChangeTitle, handleSubmit }) => (
 );
 
 ActivityForm.propTypes = {
-  handleChangeTitle: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  handleChangeTitle: PropTypes.func,
+  handleSubmit: PropTypes.func,
+};
+
+ActivityForm.defaultProps = {
+  handleSubmit: () => {
+
+  },
+  handleChangeTitle: () => {
+
+  },
 };
 
 export default ActivityForm;

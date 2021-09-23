@@ -16,7 +16,7 @@ const Login = () => {
 
   const successLoginRedirect = (data) => {
     if (data.data.status === 'signed_in') {
-      history.push('/');
+      history.push('/success-auth');
     }
   };
 
@@ -27,9 +27,8 @@ const Login = () => {
     };
 
     try {
-      axios.post('http://localhost:3000/api/login', logInUser, { withCredentials: true })
+      axios.post('https://dry-atoll-78054.herokuapp.com/api/login', logInUser, { withCredentials: true })
         .then((response) => {
-          // if (response.data.is_success) {
           dispatch(signInUserAction({ ...response.data, loggedIn: true }));
           localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
           successLoginRedirect(response);
@@ -51,8 +50,8 @@ const Login = () => {
         <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} required />
         <button type="submit">Login</button>
         <span>
-          Already have an account?
-          <Link to="/login"> Log in</Link>
+          No account yet? no worries just
+          <Link to="/signup"> Sign up</Link>
         </span>
       </form>
     </div>

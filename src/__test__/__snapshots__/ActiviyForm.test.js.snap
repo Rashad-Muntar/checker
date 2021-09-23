@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Renders Activity form component 1`] = `
+<div
+  className="new-activity"
+>
+  <i
+    className="clock outline icon"
+  />
+  <p>
+    Create a new Activity
+  </p>
+  <small>
+    Start the timer of the activity you are about to take
+  </small>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      onChange={[Function]}
+      placeholder="Enter your next Activity"
+      type="text"
+    />
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;
