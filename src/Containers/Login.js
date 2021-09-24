@@ -27,7 +27,7 @@ const Login = () => {
     };
 
     try {
-      axios.post('https://dry-atoll-78054.herokuapp.com/api/login', logInUser, { withCredentials: true })
+      axios.post('https://gentle-taiga-27732.herokuapp.com/api/login', logInUser, { withCredentials: true })
         .then((response) => {
           dispatch(signInUserAction({ ...response.data, loggedIn: true }));
           localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));

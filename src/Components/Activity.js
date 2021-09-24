@@ -34,7 +34,7 @@ const Activity = ({
 
   const upDateTimer = () => {
     try {
-      axios.get(`https://dry-atoll-78054.herokuapp.com/api/users/${localUser.id}/categories`)
+      axios.get(`https://gentle-taiga-27732.herokuapp.com/api/users/${localUser.id}/categories`)
         .then((response) => {
           response.data.map((cat) => {
             if (cat.user_id === localUser.id && cat.id === comparer) {
@@ -46,7 +46,7 @@ const Activity = ({
                 hour: newHour,
                 minute: newMinute,
               };
-              axios.put(`https://dry-atoll-78054.herokuapp.com/api/users/${localUser.id}/categories/${comparer}`, upData);
+              axios.put(`https://gentle-taiga-27732.herokuapp.com/api/users/${localUser.id}/categories/${comparer}`, upData);
             }
             return null;
           });

@@ -29,7 +29,7 @@ function App() {
   };
 
   const logoutHandler = () => {
-    axios.delete('https://dry-atoll-78054.herokuapp.com/api/logout', {
+    axios.delete('https://gentle-taiga-27732.herokuapp.com/api/logout', {
       withCredentials: true,
     })
       .then(() => {
