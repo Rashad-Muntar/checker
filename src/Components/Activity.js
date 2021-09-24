@@ -62,6 +62,7 @@ const Activity = ({
   const updateTimerhandler = () => {
     setTimerOn(false);
     upDateTimer();
+    history.push('/');
   };
 
   useEffect(() => {
@@ -72,7 +73,6 @@ const Activity = ({
       }, 1000);
     } else {
       clearInterval(interval);
-      history.push('/');
     }
     return () => clearInterval(interval);
   }, [timerOn]);
