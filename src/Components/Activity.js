@@ -1,7 +1,7 @@
 /* eslint-disable radix */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../assets/styles/Activity.css';
 
@@ -17,7 +17,6 @@ const Activity = ({
   const id = useParams();
   const comparer = parseInt(id.id);
   const localUser = JSON.parse(localStorage.getItem('user'));
-  const history = useHistory();
 
   useEffect(() => {
     if (second === 59) {
@@ -62,7 +61,6 @@ const Activity = ({
   const updateTimerhandler = () => {
     setTimerOn(false);
     upDateTimer();
-    history.push('/');
   };
 
   useEffect(() => {
