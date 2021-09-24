@@ -27,6 +27,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "stylelint": "^13.13.1",
+    "stylelint-scss": "3.x",
     "stylelint-config-standard": "21.x",
     "stylelint-csstree-validator": "1.x",
     "web-vitals": "^1.0.1"
