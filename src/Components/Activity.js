@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { updateTimer } from '../APIs/calls';
 import '../assets/styles/Activity.css';
 
 const Activity = ({
@@ -16,7 +16,6 @@ const Activity = ({
   const [hour, setHour] = useState(0);
   const id = useParams();
   const comparer = parseInt(id.id);
-  const localUser = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     if (second === 59) {
@@ -32,35 +31,9 @@ const Activity = ({
     }
   }, [second]);
 
-  const upDateTimer = () => {
-    try {
-      axios.get(`https://gentle-taiga-27732.herokuapp.com/api/users/${localUser.id}/categories`)
-        .then((response) => {
-          response.data.map((cat) => {
-            if (cat.user_id === localUser.id && cat.id === comparer) {
-              let newHour = cat.hour;
-              let newMinute = cat.minute;
-              newHour += hour;
-              newMinute += minute;
-              const upData = {
-                hour: newHour,
-                minute: newMinute,
-              };
-              axios.put(`https://gentle-taiga-27732.herokuapp.com/api/users/${localUser.id}/categories/${comparer}`, upData);
-            }
-            return null;
-          });
-          return null;
-        });
-    } catch (error) {
-      return error.message;
-    }
-    return null;
-  };
-
   const updateTimerhandler = () => {
     setTimerOn(false);
-    upDateTimer();
+    updateTimer(hour, minute, comparer);
   };
 
   useEffect(() => {

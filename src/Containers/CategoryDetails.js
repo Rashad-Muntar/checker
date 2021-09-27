@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import Activity from '../Components/Activity';
 import ActivityForm from './ActivityForm';
+// import { getActivitties } from '../APIs/calls';
 import '../assets/styles/DetailsPage.css';
 
 const CategoryDetails = () => {
@@ -15,7 +16,7 @@ const CategoryDetails = () => {
 
   const getActivitties = async () => {
     try {
-      const response = await axios.get(`https://gentle-taiga-27732.herokuapp.com/api/users/${localUser.id}/categories/${comparer}/activities`);
+      const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`);
       const returnData = response.data.activities;
       setActivities(returnData);
     } catch (error) {
@@ -23,7 +24,6 @@ const CategoryDetails = () => {
     }
     return null;
   };
-
   useEffect(() => {
     getActivitties();
   }, []);
@@ -41,7 +41,7 @@ const CategoryDetails = () => {
     };
 
     try {
-      axios.post(`https://gentle-taiga-27732.herokuapp.com/api/users/${localUser.id}/categories/${comparer}/activities`, activityData)
+      axios.post(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`, activityData)
         .then((response) => {
           setActivities([response.data.activity, ...activities]);
         });

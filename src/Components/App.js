@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
 import {
   BrowserRouter as Router, Route, Switch, useHistory,
 } from 'react-router-dom';
@@ -13,6 +12,7 @@ import LandingPage from './landingPage';
 import { signInUserAction, setLogoutAction } from '../Actions';
 import Navbar from '../Containers/Navbar';
 import Footer from './Footer';
+import { logoutHandler } from '../APIs/calls';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,15 +28,10 @@ function App() {
     }
   };
 
-  const logoutHandler = () => {
-    axios.delete('https://gentle-taiga-27732.herokuapp.com/api/logout', {
-      withCredentials: true,
-    })
-      .then(() => {
-        localStorage.removeItem('user');
-        dispatch(setLogoutAction());
-        history.push('/');
-      });
+  const userlogoutHandler = () => {
+    logoutHandler();
+    dispatch(setLogoutAction());
+    history.push('/');
   };
 
   useEffect(() => {
@@ -46,7 +41,7 @@ function App() {
   return (
     <Router>
 
-      <Navbar logoutHandler={logoutHandler} />
+      <Navbar logoutHandler={userlogoutHandler} />
 
       <Switch>
         <Route path="/" component={CategoryList} exact />
@@ -57,7 +52,7 @@ function App() {
         <Route path="/user" component={UserPage} exact />
         <Route>Oooops 404 NOT FOUND</Route>
       </Switch>
-      <Footer logoutHandler={logoutHandler} />
+      <Footer logoutHandler={userlogoutHandler} />
     </Router>
   );
 }

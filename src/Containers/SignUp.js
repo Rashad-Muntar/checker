@@ -12,13 +12,13 @@ const Signup = () => {
   const [userName, setUserName] = useState('');
   const history = useHistory();
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+  // const handleEmailChange = (e) => {
+  //   setEmail(e.target.value);
+  // };
 
-  const handleUserNameChange = (e) => {
-    setUserName(e.target.value);
-  };
+  // const handleUserNameChange = (e) => {
+  //   setUserName(e.target.value);
+  // };
 
   const successRegisterRedirect = (data) => {
     if (data.data.status === 'created') {
@@ -64,7 +64,7 @@ const Signup = () => {
       ],
     };
     try {
-      axios.post(`https://gentle-taiga-27732.herokuapp.com/api/users/${id}/categories`, categories);
+      axios.post(`http://localhost:3000/api/users/${id}/categories`, categories);
     } catch (error) {
       return error.message;
     }
@@ -80,7 +80,7 @@ const Signup = () => {
       },
     };
     try {
-      axios.post('https://gentle-taiga-27732.herokuapp.com/api/signup', newUser, { withCredentials: true })
+      axios.post('http://localhost:3000/api/signup', newUser, { withCredentials: true })
         .then((response) => {
           if (response.data.status === 'created') {
             dispatch(signUpUserAction({ ...response.data.data, loggedIn: true }));
@@ -102,8 +102,8 @@ const Signup = () => {
       <p>Sign up</p>
       <small>Create an account with easily and track your daily activities</small>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} required />
-        <input type="email" placeholder="Enter your email" onChange={handleEmailChange} required />
+        <input type="text" placeholder="Enter your name" onChange={setUserName} required />
+        <input type="email" placeholder="Enter your email" onChange={setEmail} required />
         <button type="submit">Sign up</button>
         <span>
           Already have an account?
