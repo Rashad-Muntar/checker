@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { categoryFetcher } from '../Actions/index';
+import { categoryFetcher } from '../APIs/calls';
 import InitCategory from '../Components/initCategory';
 import Category from '../Components/Category';
 import '../assets/styles/category.css';

@@ -1,31 +1,36 @@
 /* eslint-disable radix */
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import Activity from '../Components/Activity';
 import ActivityForm from './ActivityForm';
-// import { getActivitties } from '../APIs/calls';
+import { addActivityAction } from '../Actions';
+import { fetchActivitties } from '../APIs/calls';
 import '../assets/styles/DetailsPage.css';
 
 const CategoryDetails = () => {
-  const [activities, setActivities] = useState([]);
+  const activities = useSelector((state) => state.activityReducer);
+  console.log(activities.data);
   const [title, setTitle] = useState('');
   const localUser = JSON.parse(localStorage.getItem('user'));
   const id = useParams();
   const comparer = parseInt(id.id);
+  const dispatch = useDispatch();
 
-  const getActivitties = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`);
-      const returnData = response.data.activities;
-      setActivities(returnData);
-    } catch (error) {
-      return error.message;
-    }
-    return null;
-  };
+  // const getActivitties = async () => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`);
+  //     const returnData = response.data.activities;
+  //     setActivities(returnData);
+  //   } catch (error) {
+  //     return error.message;
+  //   }
+  //   return null;
+  // };
+
   useEffect(() => {
-    getActivitties();
+    dispatch(fetchActivitties(comparer));
   }, []);
 
   const handleChangeTitle = (e) => {
@@ -43,7 +48,8 @@ const CategoryDetails = () => {
     try {
       axios.post(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`, activityData)
         .then((response) => {
-          setActivities([response.data.activity, ...activities]);
+          dispatch(addActivityAction(response.data));
+          // setActivities([response.data.activity, ...activities]);
         });
     } catch (error) {
       return error.message;
@@ -56,7 +62,7 @@ const CategoryDetails = () => {
     <div className="details-page-wrapper">
       <div className="Activity-main-wrapper">
         {
-      activities.length !== 0 && activities.map((activity) => (
+      activities.length !== 0 && activities.data.map((activity) => (
         activity.category_id === comparer
         && (
           <Activity

@@ -1,4 +1,6 @@
+/* eslint-disable radix */
 import axios from 'axios';
+import { getActivityAction, addActivityAction, categoryAction } from '../Actions';
 
 // const baseUrl = 'http://localhost:3000/api';
 const localUser = JSON.parse(localStorage.getItem('user'));
@@ -38,16 +40,47 @@ const updateTimer = (hour, minute, comparer) => {
   return null;
 };
 
-const getActivitties = async (comparer) => {
-  try {
-    const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`);
-    return response.data.activities;
-    // setActivities(returnData);
-  } catch (error) {
-    return error.message;
+const categoryFetcher = () => async (dispatch) => {
+  if (localStorage.getItem('user') != null) {
+    try {
+      const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories`);
+      const category = await response.data;
+      dispatch(categoryAction(category));
+    } catch (error) {
+      return error.message;
+    }
   }
+  return null;
+};
+
+const fetchActivitties = () => async (comparer, dispatch) => {
+  if (localStorage.getItem('user') != null) {
+    try {
+      const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`);
+      console.log(response.data.activities);
+      const activities = await response.data.activities;
+      dispatch(getActivityAction(activities));
+    } catch (error) {
+      return error.message;
+    }
+  }
+  return null;
+};
+
+const postActivitties = () => async (comparer, data, dispatch) => {
+  if (localStorage.getItem('user') != null) {
+    try {
+      const response = await axios.post(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`, data);
+      console.log(response.data);
+      const activities = await response.data;
+      dispatch(addActivityAction(activities));
+    } catch (error) {
+      return error.message;
+    }
+  }
+  return null;
 };
 
 export {
-  logoutHandler, updateTimer, getActivitties,
+  logoutHandler, updateTimer, postActivitties, fetchActivitties, categoryFetcher,
 };

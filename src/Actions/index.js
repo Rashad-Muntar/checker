@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const categoryAction = (data) => ({
   type: 'FETCH-CATEGORIES',
   data,
@@ -24,16 +22,12 @@ export const setLogoutAction = () => ({
   type: 'LOGOUT-USER',
 });
 
-export const categoryFetcher = () => async (dispatch) => {
-  if (localStorage.getItem('user') != null) {
-    const localUser = JSON.parse(localStorage.getItem('user'));
-    try {
-      const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories`);
-      const category = await response.data;
-      dispatch(categoryAction(category));
-    } catch (error) {
-      return error.message;
-    }
-  }
-  return null;
-};
+export const getActivityAction = (data) => ({
+  type: 'GET-ACTIVITY',
+  data,
+});
+
+export const addActivityAction = (data) => ({
+  type: 'ADD-ACTIVITY',
+  data,
+});
