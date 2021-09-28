@@ -1,33 +1,19 @@
 /* eslint-disable radix */
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import Activity from '../Components/Activity';
 import ActivityForm from './ActivityForm';
-import { addActivityAction } from '../Actions';
-import { fetchActivitties } from '../APIs/calls';
+import { fetchActivitties, postActivitties, baseUrl } from '../APIs/calls';
 import '../assets/styles/DetailsPage.css';
 
 const CategoryDetails = () => {
   const activities = useSelector((state) => state.activityReducer);
-  console.log(activities.data);
   const [title, setTitle] = useState('');
   const localUser = JSON.parse(localStorage.getItem('user'));
   const id = useParams();
   const comparer = parseInt(id.id);
   const dispatch = useDispatch();
-
-  // const getActivitties = async () => {
-  //   try {
-  //     const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`);
-  //     const returnData = response.data.activities;
-  //     setActivities(returnData);
-  //   } catch (error) {
-  //     return error.message;
-  //   }
-  //   return null;
-  // };
 
   useEffect(() => {
     dispatch(fetchActivitties(comparer));
@@ -37,25 +23,14 @@ const CategoryDetails = () => {
     setTitle(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const activityData = {
       title,
       category_id: comparer,
       user_id: localUser.id,
     };
-
-    try {
-      axios.post(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`, activityData)
-        .then((response) => {
-          dispatch(addActivityAction(response.data));
-          // setActivities([response.data.activity, ...activities]);
-        });
-    } catch (error) {
-      return error.message;
-    }
-    setTitle('');
-    return null;
+    dispatch(postActivitties(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities`, activityData));
   };
 
   return (

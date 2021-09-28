@@ -1,10 +1,8 @@
-const initialState = {
-  data: [
+// const initialState = [
 
-  ],
-};
+// ];
 
-const activityReducer = (state = initialState, action) => {
+const activityReducer = (state = { data: [] }, action) => {
   switch (action.type) {
     case 'GET-ACTIVITY':
       return {
@@ -13,10 +11,7 @@ const activityReducer = (state = initialState, action) => {
       };
 
     case 'ADD-ACTIVITY':
-      return {
-        ...state,
-        data: action.data,
-      };
+      return { data: [action.data, ...state.data] };
     default:
       return state;
   }

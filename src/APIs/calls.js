@@ -1,12 +1,15 @@
-/* eslint-disable radix */
 import axios from 'axios';
-import { getActivityAction, addActivityAction, categoryAction } from '../Actions';
 
-// const baseUrl = 'http://localhost:3000/api';
+import {
+  getActivityAction, signInUserAction, addActivityAction, categoryAction,
+} from '../Actions';
+
+const baseUrl = 'http://localhost:3000/api';
+
 const localUser = JSON.parse(localStorage.getItem('user'));
 
 const logoutHandler = () => {
-  axios.delete('http://localhost:3000/api/logout', {
+  axios.delete(`${baseUrl}/logout`, {
     withCredentials: true,
   })
     .then(() => {
@@ -16,7 +19,7 @@ const logoutHandler = () => {
 
 const updateTimer = (hour, minute, comparer) => {
   try {
-    axios.get(`http://localhost:3000/api/users/${localUser.id}/categories`)
+    axios.get(`${baseUrl}/users/${localUser.id}/categories`)
       .then((response) => {
         response.data.map((cat) => {
           if (cat.user_id === localUser.id && cat.id === comparer) {
@@ -28,7 +31,7 @@ const updateTimer = (hour, minute, comparer) => {
               hour: newHour,
               minute: newMinute,
             };
-            axios.put(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}`, upData);
+            axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}`, upData);
           }
           return null;
         });
@@ -43,7 +46,7 @@ const updateTimer = (hour, minute, comparer) => {
 const categoryFetcher = () => async (dispatch) => {
   if (localStorage.getItem('user') != null) {
     try {
-      const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories`);
+      const response = await axios.get(`${baseUrl}/users/${localUser.id}/categories`);
       const category = await response.data;
       dispatch(categoryAction(category));
     } catch (error) {
@@ -53,11 +56,10 @@ const categoryFetcher = () => async (dispatch) => {
   return null;
 };
 
-const fetchActivitties = () => async (comparer, dispatch) => {
+const fetchActivitties = (comparer) => async (dispatch) => {
   if (localStorage.getItem('user') != null) {
     try {
-      const response = await axios.get(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`);
-      console.log(response.data.activities);
+      const response = await axios.get(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities`);
       const activities = await response.data.activities;
       dispatch(getActivityAction(activities));
     } catch (error) {
@@ -67,20 +69,24 @@ const fetchActivitties = () => async (comparer, dispatch) => {
   return null;
 };
 
-const postActivitties = () => async (comparer, data, dispatch) => {
-  if (localStorage.getItem('user') != null) {
-    try {
-      const response = await axios.post(`http://localhost:3000/api/users/${localUser.id}/categories/${comparer}/activities`, data);
-      console.log(response.data);
-      const activities = await response.data;
-      dispatch(addActivityAction(activities));
-    } catch (error) {
-      return error.message;
-    }
-  }
-  return null;
+const postActivitties = (url, data) => (dispatch) => {
+  axios.post(url, data)
+    .then((response) => {
+      const returnData = response.data.activity;
+      console.log(response.data.activity);
+      dispatch(addActivityAction({ ...returnData }));
+    });
+};
+
+const login = (url, data) => (dispatch) => {
+  axios.post(url, data)
+    .then((response) => {
+      dispatch(signInUserAction({ ...response.data, loggedIn: true }));
+      localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
+      return response;
+    });
 };
 
 export {
-  logoutHandler, updateTimer, postActivitties, fetchActivitties, categoryFetcher,
+  logoutHandler, login, baseUrl, updateTimer, postActivitties, fetchActivitties, categoryFetcher,
 };

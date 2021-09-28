@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
-import { signInUserAction } from '../Actions';
 import '../assets/styles/Form.css';
+import { login } from '../APIs/calls';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
@@ -14,30 +13,26 @@ const Login = () => {
     setUserName(e.target.value);
   };
 
-  const successLoginRedirect = (data) => {
-    if (data.data.status === 'signed_in') {
-      history.push('/success-auth');
-    }
-  };
-
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const logInUser = {
       username: userName,
     };
-
-    try {
-      axios.post('http://localhost:3000/api/login', logInUser, { withCredentials: true })
-        .then((response) => {
-          dispatch(signInUserAction({ ...response.data, loggedIn: true }));
-          localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
-          successLoginRedirect(response);
-        });
-    } catch (error) {
-      return error.message;
-    }
-    setUserName('');
-    return null;
+    dispatch(login('http://localhost:3000/api/login', logInUser));
+    history.push('/success-auth');
+    // try {
+    //   axios.post('http://localhost:3000/api/login', logInUser, { withCredentials: true })
+    //     .then((response) => {
+    //       dispatch(signInUserAction({ ...response.data, loggedIn: true }));
+    //       localStorage.setItem('user',
+    // JSON.stringify({ ...response.data.user, loggedIn: true }));
+    //       successLoginRedirect(response);
+    //     });
+    // } catch (error) {
+    //   return error.message;
+    // }
+    // setUserName('');
+    // return null;
   };
 
   return (
