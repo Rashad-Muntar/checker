@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {
-  getActivityAction, signInUserAction, addActivityAction, categoryAction,
+  getActivityAction, addActivityAction, categoryAction,
 } from '../Actions';
 
 const baseUrl = 'http://localhost:3000/api';
@@ -78,15 +78,27 @@ const postActivitties = (url, data) => (dispatch) => {
     });
 };
 
-const login = (url, data) => (dispatch) => {
-  axios.post(url, data)
-    .then((response) => {
-      dispatch(signInUserAction({ ...response.data, loggedIn: true }));
-      localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
-      return response;
-    });
+const authResponse = (response) => response;
+
+const login = (url, data) => {
+  const response = axios.post(url, data);
+  return response;
+};
+
+const signup = (url, data) => {
+  const response = axios.post(url, data);
+  return response;
+};
+
+const postCategory = (url, data) => {
+  axios.post(url, data);
 };
 
 export {
-  logoutHandler, login, baseUrl, updateTimer, postActivitties, fetchActivitties, categoryFetcher,
+  logoutHandler, authResponse,
+  login, signup,
+  baseUrl,
+  updateTimer,
+  postActivitties, postCategory,
+  fetchActivitties, categoryFetcher,
 };

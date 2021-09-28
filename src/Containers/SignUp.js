@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
 import '../assets/styles/Form.css';
 import { signUpUserAction } from '../Actions';
+import { signup, postCategory, baseUrl } from '../APIs/calls';
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -63,11 +63,7 @@ const Signup = () => {
         },
       ],
     };
-    try {
-      axios.post(`http://localhost:3000/api/users/${id}/categories`, categories);
-    } catch (error) {
-      return error.message;
-    }
+    postCategory(`${baseUrl}/users/${id}/categories`, categories);
     return null;
   };
 
@@ -79,19 +75,29 @@ const Signup = () => {
         username: userName,
       },
     };
-    try {
-      axios.post('http://localhost:3000/api/signup', newUser, { withCredentials: true })
-        .then((response) => {
-          if (response.data.status === 'created') {
-            dispatch(signUpUserAction({ ...response.data.data, loggedIn: true }));
-            localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
-            successRegisterRedirect(response);
-            createCategories(response.data.user.id);
-          }
-        });
-    } catch (error) {
-      return error.message;
-    }
+    const response = signup(`${baseUrl}/signup`, newUser, { withCredentials: true });
+    // if (response.data.status === 'created') {
+    //   dispatch(signUpUserAction({ ...response.data.data, loggedIn: true }));
+    //   localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
+    //   successRegisterRedirect(response);
+    //   createCategories(response.data.user.id);
+    // }
+    console.log(response);
+    // try {
+    //   axios.post('http://localhost:3000/api/signup',
+    // newUser, { withCredentials: true })
+    //     .then((response) => {
+    //       if (response.data.status === 'created') {
+    //         dispatch(signUpUserAction({ ...response.data.data, loggedIn: true }));
+    //         localStorage.setItem('user',
+    // JSON.stringify({ ...response.data.user, loggedIn: true }));
+    //         successRegisterRedirect(response);
+    //         createCategories(response.data.user.id);
+    //       }
+    //     });
+    // } catch (error) {
+    //   return error.message;
+    // }
 
     return null;
   };
