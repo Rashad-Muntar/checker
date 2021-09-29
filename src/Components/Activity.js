@@ -1,7 +1,7 @@
 /* eslint-disable radix */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { updateTimer } from '../APIs/calls';
 import '../assets/styles/Activity.css';
 
@@ -18,7 +18,6 @@ const Activity = ({
   const [hour, setHour] = useState(0);
   const id = useParams();
   const comparer = parseInt(id.id);
-  const history = useHistory();
 
   useEffect(() => {
     if (second === 59) {
@@ -37,7 +36,6 @@ const Activity = ({
   const updateTimerhandler = () => {
     setTimerOn(false);
     updateTimer(hour, minute, comparer, activityId);
-    history.push(`/category/${comparer}`);
     setStartBtn('');
     setStopBtn('');
     setHour(0);
