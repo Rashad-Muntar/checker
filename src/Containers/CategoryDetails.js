@@ -1,6 +1,6 @@
 /* eslint-disable radix */
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import Activity from '../Components/Activity';
 import ActivityForm from './ActivityForm';
@@ -17,13 +17,14 @@ const CategoryDetails = () => {
   const id = useParams();
   const comparer = parseInt(id.id);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const updateActivities = async () => {
     if (localStorage.getItem('user') != null) {
       const response = await activitiesFetcher(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities`);
       const activityData = await response.data.activities;
       dispatch(getActivityAction(activityData));
-      console.log(response);
+      history.push(`/category/${comparer}`);
     }
   };
 
@@ -47,8 +48,14 @@ const CategoryDetails = () => {
 
   return (
     <div className="details-page-wrapper">
-      <div className="Activity-main-wrapper">
-        {
+      <Link to="/" className="go-back">
+        <i className="long arrow alternate left icon" />
+        {' '}
+        Go back
+      </Link>
+      <div className="main-content-wrapper">
+        <div className="Activity-main-wrapper">
+          {
       activities.length !== 0 && activities.data.map((activity) => (
         activity.category_id === comparer
         && (
@@ -62,11 +69,12 @@ const CategoryDetails = () => {
         )
       ))
     }
+        </div>
+        <ActivityForm
+          handleChangeTitle={handleChangeTitle}
+          handleSubmit={handleSubmit}
+        />
       </div>
-      <ActivityForm
-        handleChangeTitle={handleChangeTitle}
-        handleSubmit={handleSubmit}
-      />
     </div>
   );
 };

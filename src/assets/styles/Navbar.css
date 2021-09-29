@@ -45,9 +45,14 @@ nav .content-wrapper {
   color: wheat;
 }
 
-.navbar .right a {
-  width: 70px;
+.navbar-light .navbar-brand {
   text-align: right;
+  font-weight: 800 !important;
+  font-size: 2em;
+}
+
+.navbar-light .navbar-brand:focus {
+  color: wheat;
 }
 
 .logout {

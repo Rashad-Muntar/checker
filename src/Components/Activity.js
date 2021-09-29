@@ -1,7 +1,7 @@
 /* eslint-disable radix */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { updateTimer } from '../APIs/calls';
 import '../assets/styles/Activity.css';
 
@@ -11,12 +11,14 @@ const Activity = ({
   complete,
 }) => {
   const [timerOn, setTimerOn] = useState(false);
+  const [startBtn, setStartBtn] = useState(<button id={activityId} onClick={() => setTimerOn(true)} type="button">Start timer</button>);
+  const [stopBtn, setStopBtn] = useState(<button id={activityId} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Stop timer</button>);
   const [second, setSecond] = useState(0);
   const [minute, setMinute] = useState(0);
   const [hour, setHour] = useState(0);
   const id = useParams();
   const comparer = parseInt(id.id);
-  // const history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     if (second === 59) {
@@ -34,7 +36,10 @@ const Activity = ({
 
   const updateTimerhandler = () => {
     setTimerOn(false);
-    updateTimer(hour, minute, comparer);
+    updateTimer(hour, minute, comparer, activityId);
+    history.push(`/category/${comparer}`);
+    setStartBtn('');
+    setStopBtn('');
     setHour(0);
     setSecond(0);
     setMinute(0);
@@ -97,8 +102,8 @@ const Activity = ({
       </div>
       { complete === false && (
         <>
-          <button id={activityId} onClick={() => setTimerOn(true)} type="button">Start timer</button>
-          <button id={activityId} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Stop timer</button>
+          {startBtn}
+          {stopBtn}
         </>
       )}
     </div>

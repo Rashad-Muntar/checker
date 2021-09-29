@@ -17,7 +17,7 @@ const logoutHandler = () => {
     });
 };
 
-const updateTimer = (hour, minute, comparer) => {
+const updateTimer = (hour, minute, comparer, activityId) => {
   try {
     axios.get(`${baseUrl}/users/${localUser.id}/categories`)
       .then((response) => {
@@ -32,6 +32,11 @@ const updateTimer = (hour, minute, comparer) => {
               minute: newMinute,
             };
             axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}`, upData);
+            const updateActivity = {
+              complete: true,
+            };
+            const response = axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities/${activityId}`, updateActivity);
+            console.log(response.data);
           }
           return null;
         });
