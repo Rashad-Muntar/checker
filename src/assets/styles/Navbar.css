@@ -2,6 +2,8 @@ nav {
   background-color: #3a062d;
   width: 100%;
   height: 50px;
+  top: 0;
+  position: fixed;
 }
 
 nav .content-wrapper {

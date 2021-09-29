@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {
-  getActivityAction, addActivityAction, categoryAction,
+  addActivityAction,
 } from '../Actions';
 
 const baseUrl = 'http://localhost:3000/api';
@@ -43,18 +43,6 @@ const updateTimer = (hour, minute, comparer) => {
   return null;
 };
 
-const categoryFetcher = () => async (dispatch) => {
-  try {
-    const response = await axios.get(`${baseUrl}/users/${localUser.id}/categories`);
-    const category = await response.data;
-    dispatch(categoryAction(category));
-    console.log(response.data);
-  } catch (error) {
-    return error.message;
-  }
-  return null;
-};
-
 const cats = (url) => {
   try {
     const response = axios.get(url);
@@ -64,17 +52,9 @@ const cats = (url) => {
   }
 };
 
-const fetchActivitties = (comparer) => async (dispatch) => {
-  if (localStorage.getItem('user') != null) {
-    try {
-      const response = await axios.get(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities`);
-      const activities = await response.data.activities;
-      dispatch(getActivityAction(activities));
-    } catch (error) {
-      return error.message;
-    }
-  }
-  return null;
+const activitiesFetcher = (url) => {
+  const response = axios.get(url);
+  return response;
 };
 
 const postActivitties = (url, data) => (dispatch) => {
@@ -108,5 +88,5 @@ export {
   cats,
   updateTimer,
   postActivitties, postCategory,
-  fetchActivitties, categoryFetcher,
+  activitiesFetcher,
 };

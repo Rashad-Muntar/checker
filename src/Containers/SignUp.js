@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import '../assets/styles/Form.css';
 import { signUpUserAction } from '../Actions';
 import {
-  signup, postCategory, baseUrl, categoryFetcher,
+  signup, postCategory, baseUrl,
 } from '../APIs/calls';
 
 const Signup = () => {
@@ -66,7 +66,6 @@ const Signup = () => {
       ],
     };
     postCategory(`${baseUrl}/users/${id}/categories`, categories);
-    dispatch(categoryFetcher());
     return null;
   };
 

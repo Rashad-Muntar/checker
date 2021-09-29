@@ -91,3 +91,19 @@ input:focus {
     width: 90%;
   }
 }
+
+.error-msg{
+  transition: 1s;
+}
+.displayMessage{
+  visibility: visible;
+  opacity: 1;
+  transition: 2s;
+}
+
+.hideMessage{
+  display: none;
+  opacity: 0;
+  transition: 2s;
+}
+

@@ -12,10 +12,12 @@ const Footer = ({ logoutHandler }) => {
           <i className="home icon" />
           <span>Home</span>
         </Link>
-        <button type="button" className="logout" onClick={logoutHandler}>
-          <i className="sign out alternate icon" />
-          Logout
-        </button>
+        <Link to="/">
+          <button type="button" className="logout" onClick={logoutHandler}>
+            <i className="sign out alternate icon" />
+            Logout
+          </button>
+        </Link>
       </footer>
     )
 

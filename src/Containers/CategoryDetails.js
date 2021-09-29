@@ -4,7 +4,10 @@ import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import Activity from '../Components/Activity';
 import ActivityForm from './ActivityForm';
-import { fetchActivitties, postActivitties, baseUrl } from '../APIs/calls';
+import { getActivityAction } from '../Actions';
+import {
+  postActivitties, activitiesFetcher, baseUrl,
+} from '../APIs/calls';
 import '../assets/styles/DetailsPage.css';
 
 const CategoryDetails = () => {
@@ -15,8 +18,17 @@ const CategoryDetails = () => {
   const comparer = parseInt(id.id);
   const dispatch = useDispatch();
 
+  const updateActivities = async () => {
+    if (localStorage.getItem('user') != null) {
+      const response = await activitiesFetcher(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities`);
+      const activityData = await response.data.activities;
+      dispatch(getActivityAction(activityData));
+      console.log(response);
+    }
+  };
+
   useEffect(() => {
-    dispatch(fetchActivitties(comparer));
+    updateActivities();
   }, []);
 
   const handleChangeTitle = (e) => {

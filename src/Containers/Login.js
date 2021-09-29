@@ -7,9 +7,10 @@ import { signInUserAction } from '../Actions';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
+  const [err, setErr] = useState('');
   const history = useHistory();
   const dispatch = useDispatch();
-  const [err, setErr] = useState('');
+
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);
   };
@@ -27,37 +28,28 @@ const Login = () => {
     };
     try {
       const response = await login(`${baseUrl}/login`, logInUser);
-      if (response.status === 'signed_in') {
+      if (response.data.status === 'signed_in') {
         dispatch(signInUserAction({ ...response.data, loggedIn: true }));
         localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
         successLoginRedirect(response);
       }
-    } catch (e) {
-      console.log(e.response.data);
-      setTimeout(() => {
-        setErr(
-          <div className="ui red message login-message">Sorry. no account for username</div>,
-        );
-      }, 5000);
+    } catch (err) {
+      if (err.response.data.error === 'invalid_credentials') {
+        setTimeout(() => {
+          console.log('Invalid username');
+          setErr(<div className="ui mini red message error-msg displayMessage">No account for username</div>);
+        }, 100);
+        setTimeout(() => {
+          console.log('Invalid username');
+          setErr(<div className="ui red message error-msg hideMessage">Sorry no account for username</div>);
+        }, 5000);
+      }
     }
-
-    // } catch (errors) {
-    //   console.log(errors.message);
-
-    // }
-
-    // if (response.status === 500) {
-    //   setTimeout(() => {
-    //     <div className="message-wrapper">
-    //       <div className="ui red message login-message">Sorry. no account for username</div>
-    //     </div>;
-    //   }, 5000);
-    // }
   };
 
   return (
     <div className="form-wrapper">
-      <div className="message-wrapper">{err}</div>
+      <div>{err}</div>
       <i className="clock outline icon" />
       <p>Log in</p>
       <small>Lets get back to helping you track your activities</small>
