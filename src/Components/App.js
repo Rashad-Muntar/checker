@@ -40,7 +40,6 @@ function App() {
 
   return (
     <Router>
-
       <Navbar logoutHandler={userlogoutHandler} />
 
       <Switch>

@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import '../assets/styles/Form.css';
 import { signUpUserAction } from '../Actions';
-import { signup, postCategory, baseUrl } from '../APIs/calls';
+import {
+  signup, postCategory, baseUrl, categoryFetcher,
+} from '../APIs/calls';
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -12,13 +14,13 @@ const Signup = () => {
   const [userName, setUserName] = useState('');
   const history = useHistory();
 
-  // const handleEmailChange = (e) => {
-  //   setEmail(e.target.value);
-  // };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
-  // const handleUserNameChange = (e) => {
-  //   setUserName(e.target.value);
-  // };
+  const handleUserNameChange = (e) => {
+    setUserName(e.target.value);
+  };
 
   const successRegisterRedirect = (data) => {
     if (data.data.status === 'created') {
@@ -64,10 +66,11 @@ const Signup = () => {
       ],
     };
     postCategory(`${baseUrl}/users/${id}/categories`, categories);
+    dispatch(categoryFetcher());
     return null;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newUser = {
       user: {
@@ -75,14 +78,13 @@ const Signup = () => {
         username: userName,
       },
     };
-    const response = signup(`${baseUrl}/signup`, newUser, { withCredentials: true });
-    // if (response.data.status === 'created') {
-    //   dispatch(signUpUserAction({ ...response.data.data, loggedIn: true }));
-    //   localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
-    //   successRegisterRedirect(response);
-    //   createCategories(response.data.user.id);
-    // }
-    console.log(response);
+    const response = await signup(`${baseUrl}/signup`, newUser, { withCredentials: true });
+    if (response.data.status === 'created') {
+      dispatch(signUpUserAction({ ...response.data.data, loggedIn: true }));
+      localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
+      successRegisterRedirect(response);
+      createCategories(response.data.user.id);
+    }
     // try {
     //   axios.post('http://localhost:3000/api/signup',
     // newUser, { withCredentials: true })
@@ -108,8 +110,8 @@ const Signup = () => {
       <p>Sign up</p>
       <small>Create an account with easily and track your daily activities</small>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Enter your name" onChange={setUserName} required />
-        <input type="email" placeholder="Enter your email" onChange={setEmail} required />
+        <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} required />
+        <input type="email" placeholder="Enter your email" onChange={handleEmailChange} required />
         <button type="submit">Sign up</button>
         <span>
           Already have an account?

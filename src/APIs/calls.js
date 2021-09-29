@@ -44,16 +44,24 @@ const updateTimer = (hour, minute, comparer) => {
 };
 
 const categoryFetcher = () => async (dispatch) => {
-  if (localStorage.getItem('user') != null) {
-    try {
-      const response = await axios.get(`${baseUrl}/users/${localUser.id}/categories`);
-      const category = await response.data;
-      dispatch(categoryAction(category));
-    } catch (error) {
-      return error.message;
-    }
+  try {
+    const response = await axios.get(`${baseUrl}/users/${localUser.id}/categories`);
+    const category = await response.data;
+    dispatch(categoryAction(category));
+    console.log(response.data);
+  } catch (error) {
+    return error.message;
   }
   return null;
+};
+
+const cats = (url) => {
+  try {
+    const response = axios.get(url);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
 };
 
 const fetchActivitties = (comparer) => async (dispatch) => {
@@ -78,8 +86,6 @@ const postActivitties = (url, data) => (dispatch) => {
     });
 };
 
-const authResponse = (response) => response;
-
 const login = (url, data) => {
   const response = axios.post(url, data);
   return response;
@@ -91,13 +97,15 @@ const signup = (url, data) => {
 };
 
 const postCategory = (url, data) => {
-  axios.post(url, data);
+  const response = axios.post(url, data);
+  return response;
 };
 
 export {
-  logoutHandler, authResponse,
+  logoutHandler,
   login, signup,
   baseUrl,
+  cats,
   updateTimer,
   postActivitties, postCategory,
   fetchActivitties, categoryFetcher,

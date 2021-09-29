@@ -67,6 +67,19 @@ input:focus {
   border: none;
   cursor: pointer;
 }
+.login-message{
+  width: 100%;
+  margin: 0 auto;
+  opacity: 0.6;
+}
+
+.message-wrapper{
+  /* position: absolute !important; */
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
 
 @media screen and (max-width: 460px) {
   .form-wrapper {

@@ -1,13 +1,21 @@
-body,
-html {
+body, html {
   background-image: url("../images/merlin_172573308_182a1100-9b46-4a69-8963-0da7ace07c1a-articleLarge.jpg");
   background-size: cover;
   background-position: center;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  margin:  0 auto;
 }
 
 a {
   text-decoration: none;
 }
+
+/* .displayMessage{
+  display: block;
+}
+
+.hideMessage{
+  display: none;
+} */
