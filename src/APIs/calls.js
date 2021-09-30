@@ -4,7 +4,7 @@ import {
   addActivityAction,
 } from '../Actions';
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = 'https://quiet-citadel-65357.herokuapp.com/api';
 
 const logoutHandler = () => {
   axios.delete(`${baseUrl}/logout`, {
