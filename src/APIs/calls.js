@@ -4,7 +4,7 @@ import {
   addActivityAction,
 } from '../Actions';
 
-const baseUrl = 'https://gentle-taiga-27732.herokuapp.com/api';
+const baseUrl = 'http://localhost:3000/api';
 
 const localUser = JSON.parse(localStorage.getItem('user'));
 
@@ -19,26 +19,22 @@ const logoutHandler = () => {
 
 const updateTimer = (hour, minute, comparer, activityId) => {
   try {
-    axios.get(`${baseUrl}/users/${localUser.id}/categories`)
+    axios.get(`${baseUrl}/users/${localUser.id}/categories/${comparer}`)
       .then((response) => {
-        response.data.map((cat) => {
-          if (cat.user_id === localUser.id && cat.id === comparer) {
-            let newHour = cat.hour;
-            let newMinute = cat.minute;
-            newHour += hour;
-            newMinute += minute;
-            const upData = {
-              hour: newHour,
-              minute: newMinute,
-            };
-            axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}`, upData);
-            const updateActivity = {
-              complete: true,
-            };
-            axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities/${activityId}`, updateActivity);
-          }
-          return null;
-        });
+        const catData = response.data.data.attributes;
+        let newHour = catData.hour;
+        let newMinute = catData.minute;
+        newHour += hour;
+        newMinute += minute;
+        const upDateCategory = {
+          hour: newHour,
+          minute: newMinute,
+        };
+        axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}`, upDateCategory);
+        const updateActivity = {
+          complete: true,
+        };
+        axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities/${activityId}`, updateActivity);
         return null;
       });
   } catch (error) {

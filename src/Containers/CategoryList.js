@@ -16,7 +16,7 @@ const CategoryList = () => {
   const localUser = JSON.parse(localStorage.getItem('user'));
 
   const updateCats = async () => {
-    if (localStorage.getItem('user') != null) {
+    if (user.user && localStorage.getItem('user') != null) {
       const response = await cats(`${baseUrl}/users/${localUser.id}/categories`);
       const categories = await response.data;
       dispatch(categoryAction(categories));

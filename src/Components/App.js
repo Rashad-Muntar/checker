@@ -31,7 +31,7 @@ function App() {
   const userlogoutHandler = () => {
     logoutHandler();
     dispatch(setLogoutAction());
-    history.push('/');
+    history.push('/signup');
   };
 
   useEffect(() => {

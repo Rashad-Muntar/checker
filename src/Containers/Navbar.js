@@ -22,7 +22,7 @@ const Navbar = ({ logoutHandler }) => {
                 {}
                 <i className="user outline icon" />
                 <span className="name">{user.user.username}</span>
-                <Link to="/">
+                <Link to="/signup">
                   <button type="button" className="logout" onClick={logoutHandler}>Logout</button>
                 </Link>
               </>

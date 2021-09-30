@@ -12,7 +12,7 @@ const Footer = ({ logoutHandler }) => {
           <i className="home icon" />
           <span>Home</span>
         </Link>
-        <Link to="/">
+        <Link to="/signup">
           <button type="button" className="logout" onClick={logoutHandler}>
             <i className="sign out alternate icon" />
             Logout

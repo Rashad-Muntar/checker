@@ -11,8 +11,11 @@ const Activity = ({
   complete,
 }) => {
   const [timerOn, setTimerOn] = useState(false);
-  const [startBtn, setStartBtn] = useState(<button id={activityId} onClick={() => setTimerOn(true)} type="button">Start timer</button>);
-  const [stopBtn, setStopBtn] = useState(<button id={activityId} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Stop timer</button>);
+  // const [startBtn, setStartBtn] = useState
+  // (<button id={activityId} onClick={() => setTimerOn(true)} type="button">Start timer</button>);
+  // const [stopBtn, setStopBtn] = useState(<button
+  // id={activityId} type="button"
+  // data-bs-toggle="modal" data-bs-target="#exampleModal">Stop timer</button>);
   const [second, setSecond] = useState(0);
   const [minute, setMinute] = useState(0);
   const [hour, setHour] = useState(0);
@@ -36,8 +39,8 @@ const Activity = ({
   const updateTimerhandler = () => {
     setTimerOn(false);
     updateTimer(hour, minute, comparer, activityId);
-    setStartBtn('');
-    setStopBtn('');
+    // setStartBtn('');
+    // setStopBtn('');
     setHour(0);
     setSecond(0);
     setMinute(0);
@@ -100,8 +103,10 @@ const Activity = ({
       </div>
       { complete === false && (
         <>
-          {startBtn}
-          {stopBtn}
+          {/* {startBtn}
+          {stopBtn} */}
+          <button id={activityId} onClick={() => setTimerOn(true)} type="button">Start timer</button>
+          <button id={activityId} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Stop timer</button>
         </>
       )}
     </div>

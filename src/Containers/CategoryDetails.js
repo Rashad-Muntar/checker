@@ -30,7 +30,7 @@ const CategoryDetails = () => {
 
   useEffect(() => {
     updateActivities();
-  }, []);
+  }, [dispatch]);
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);

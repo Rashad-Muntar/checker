@@ -31,3 +31,7 @@ export const addActivityAction = (data) => ({
   type: 'ADD-ACTIVITY',
   data,
 });
+
+export const clearStoreAction = () => ({
+  type: 'CLEAR-STORE',
+});
