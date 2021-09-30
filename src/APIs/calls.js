@@ -90,6 +90,7 @@ export {
   baseUrl,
   cats,
   updateTimer,
-  postActivitties, postCategory,
+  postActivitties,
+  postCategory,
   activitiesFetcher,
 };
