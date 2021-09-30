@@ -12,10 +12,15 @@ const Signup = () => {
 
   const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
   const history = useHistory();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
   };
 
   const handleUserNameChange = (e) => {
@@ -75,6 +80,7 @@ const Signup = () => {
       user: {
         email,
         username: userName,
+        password,
       },
     };
     const response = await signup(`${baseUrl}/signup`, newUser, { withCredentials: true });
@@ -84,21 +90,6 @@ const Signup = () => {
       successRegisterRedirect(response);
       createCategories(response.data.user.id);
     }
-    // try {
-    //   axios.post('http://localhost:3000/api/signup',
-    // newUser, { withCredentials: true })
-    //     .then((response) => {
-    //       if (response.data.status === 'created') {
-    //         dispatch(signUpUserAction({ ...response.data.data, loggedIn: true }));
-    //         localStorage.setItem('user',
-    // JSON.stringify({ ...response.data.user, loggedIn: true }));
-    //         successRegisterRedirect(response);
-    //         createCategories(response.data.user.id);
-    //       }
-    //     });
-    // } catch (error) {
-    //   return error.message;
-    // }
 
     return null;
   };
@@ -111,6 +102,7 @@ const Signup = () => {
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} required />
         <input type="email" placeholder="Enter your email" onChange={handleEmailChange} required />
+        <input type="password" placeholder="Enter your password" onChange={handlePasswordChange} required />
         <button type="submit">Sign up</button>
         <span>
           Already have an account?

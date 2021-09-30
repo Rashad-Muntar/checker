@@ -7,12 +7,17 @@ import { signInUserAction } from '../Actions';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
+  const [userPassword, setUserPassword] = useState('');
   const [err, setErr] = useState('');
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handleUserNameChange = (e) => {
     setUserName(e.target.value);
+  };
+
+  const handleUserPasswordChange = (e) => {
+    setUserPassword(e.target.value);
   };
 
   const successLoginRedirect = (data) => {
@@ -25,9 +30,10 @@ const Login = () => {
     e.preventDefault();
     const logInUser = {
       username: userName,
+      password: userPassword,
     };
     try {
-      const response = await login(`${baseUrl}/login`, logInUser);
+      const response = await login(`${baseUrl}/login`, logInUser, { withCredentials: true });
       if (response.data.status === 'signed_in') {
         dispatch(signInUserAction({ ...response.data, loggedIn: true }));
         localStorage.setItem('user', JSON.stringify({ ...response.data.user, loggedIn: true }));
@@ -36,11 +42,9 @@ const Login = () => {
     } catch (err) {
       if (err.response.data.error === 'invalid_credentials') {
         setTimeout(() => {
-          console.log('Invalid username');
           setErr(<div className="ui mini red message error-msg displayMessage">No account for username</div>);
         }, 100);
         setTimeout(() => {
-          console.log('Invalid username');
           setErr(<div className="ui red message error-msg hideMessage">Sorry no account for username</div>);
         }, 5000);
       }
@@ -55,6 +59,7 @@ const Login = () => {
       <small>Lets get back to helping you track your activities</small>
       <form onSubmit={handleLoginSubmit} className="form">
         <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} required />
+        <input type="password" placeholder="Enter your password" onChange={handleUserPasswordChange} required />
         <button type="submit">Login</button>
         <span>
           No account yet? no worries just

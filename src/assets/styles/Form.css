@@ -67,13 +67,14 @@ input:focus {
   border: none;
   cursor: pointer;
 }
-.login-message{
+
+.login-message {
   width: 100%;
   margin: 0 auto;
   opacity: 0.6;
 }
 
-.message-wrapper{
+.message-wrapper {
   /* position: absolute !important; */
   width: 100%;
   display: flex;
@@ -92,18 +93,18 @@ input:focus {
   }
 }
 
-.error-msg{
+.error-msg {
   transition: 1s;
 }
-.displayMessage{
+
+.displayMessage {
   visibility: visible;
   opacity: 1;
   transition: 2s;
 }
 
-.hideMessage{
+.hideMessage {
   display: none;
   opacity: 0;
   transition: 2s;
 }
-

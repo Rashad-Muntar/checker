@@ -35,8 +35,7 @@ const updateTimer = (hour, minute, comparer, activityId) => {
             const updateActivity = {
               complete: true,
             };
-            const response = axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities/${activityId}`, updateActivity);
-            console.log(response.data);
+            axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities/${activityId}`, updateActivity);
           }
           return null;
         });
@@ -66,7 +65,6 @@ const postActivitties = (url, data) => (dispatch) => {
   axios.post(url, data)
     .then((response) => {
       const returnData = response.data.activity;
-      console.log(response.data.activity);
       dispatch(addActivityAction({ ...returnData }));
     });
 };

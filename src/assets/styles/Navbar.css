@@ -49,10 +49,8 @@ nav .content-wrapper {
   text-align: right;
   font-weight: 800 !important;
   font-size: 2em;
-}
-
-.navbar-light .navbar-brand:focus {
   color: wheat;
+  transition: 300ms;
 }
 
 .logout {
@@ -97,11 +95,6 @@ nav .content-wrapper {
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
   background-color: #3a062d !important;
   color: white;
-}
-
-.navbar-light .navbar-brand {
-  color: wheat;
-  transition: 300ms;
 }
 
 .navbar-light .navbar-brand:hover {

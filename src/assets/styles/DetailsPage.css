@@ -14,20 +14,22 @@
   overflow: auto;
   height: 300px;
 }
-.main-content-wrapper{
+
+.main-content-wrapper {
   display: flex;
   width: 100%;
   margin: 0 auto;
   margin-top: 20px;
   justify-content: center;
 }
-.go-back{
+
+.go-back {
   font-weight: 800;
   color: white;
   font-size: 1.8em;
 }
 
-.go-back:hover{
+.go-back:hover {
   color: wheat;
 }
 
@@ -43,7 +45,7 @@
     flex-direction: column;
   }
 
-  .main-content-wrapper{
+  .main-content-wrapper {
     width: 100%;
     flex-direction: column;
   }
