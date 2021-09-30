@@ -4,7 +4,7 @@ import {
   addActivityAction,
 } from '../Actions';
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = 'https://gentle-taiga-27732.herokuapp.com/api';
 
 const localUser = JSON.parse(localStorage.getItem('user'));
 
