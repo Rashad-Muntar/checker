@@ -4,9 +4,7 @@ import {
   addActivityAction,
 } from '../Actions';
 
-const baseUrl = 'https://gentle-taiga-27732.herokuapp.com/api';
-
-const localUser = JSON.parse(localStorage.getItem('user'));
+const baseUrl = 'http://localhost:3000/api';
 
 const logoutHandler = () => {
   axios.delete(`${baseUrl}/logout`, {
@@ -17,29 +15,32 @@ const logoutHandler = () => {
     });
 };
 
-const updateTimer = (hour, minute, comparer, activityId) => {
-  try {
-    axios.get(`${baseUrl}/users/${localUser.id}/categories/${comparer}`)
-      .then((response) => {
-        const catData = response.data.data.attributes;
-        let newHour = catData.hour;
-        let newMinute = catData.minute;
-        newHour += hour;
-        newMinute += minute;
-        const upDateCategory = {
-          hour: newHour,
-          minute: newMinute,
-        };
-        axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}`, upDateCategory);
-        const updateActivity = {
-          complete: true,
-        };
-        axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities/${activityId}`, updateActivity);
-        return null;
-      });
-  } catch (error) {
-    return error.message;
-  }
+const activitiesFetcher = (url) => {
+  const response = axios.get(url);
+  return response;
+};
+
+const updateTimer = async (url, hour, minute, comparer, activityId) => {
+  await axios.get(url)
+    .then((response) => {
+      console.log(response);
+      const localUser = JSON.parse(localStorage.getItem('user'));
+      const catData = response.data.data.attributes;
+      let newHour = catData.hour;
+      let newMinute = catData.minute;
+      newHour += hour;
+      newMinute += minute;
+      const upDateCategory = {
+        hour: newHour,
+        minute: newMinute,
+      };
+      axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}`, upDateCategory);
+      const updateActivity = {
+        complete: true,
+      };
+      axios.put(`${baseUrl}/users/${localUser.id}/categories/${comparer}/activities/${activityId}`, updateActivity);
+      return null;
+    });
   return null;
 };
 
@@ -50,11 +51,6 @@ const cats = (url) => {
   } catch (error) {
     return error.message;
   }
-};
-
-const activitiesFetcher = (url) => {
-  const response = axios.get(url);
-  return response;
 };
 
 const postActivitties = (url, data) => (dispatch) => {

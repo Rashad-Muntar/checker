@@ -59,7 +59,7 @@ const Login = () => {
       <small>Lets get back to helping you track your activities</small>
       <form onSubmit={handleLoginSubmit} className="form">
         <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} required />
-        <input type="password" placeholder="Enter your password" onChange={handleUserPasswordChange} required />
+        <input type="password" autoComplete="on" placeholder="Enter your password" onChange={handleUserPasswordChange} required />
         <button type="submit">Login</button>
         <span>
           No account yet? no worries just

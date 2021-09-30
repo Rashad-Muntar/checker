@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { updateTimer } from '../APIs/calls';
+import { updateTimer, baseUrl } from '../APIs/calls';
 import '../assets/styles/Activity.css';
 
 const Activity = ({
@@ -21,6 +21,8 @@ const Activity = ({
   const [hour, setHour] = useState(0);
   const id = useParams();
   const comparer = parseInt(id.id);
+  const localUser = JSON.parse(localStorage.getItem('user'));
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     if (second === 59) {
@@ -36,9 +38,9 @@ const Activity = ({
     }
   }, [second]);
 
-  const updateTimerhandler = () => {
+  const updateTimerhandler = async () => {
     setTimerOn(false);
-    updateTimer(hour, minute, comparer, activityId);
+    updateTimer(`${baseUrl}/users/${localUser.id}/categories/${comparer}`, hour, minute, comparer, activityId);
     // setStartBtn('');
     // setStopBtn('');
     setHour(0);
@@ -106,7 +108,7 @@ const Activity = ({
           {/* {startBtn}
           {stopBtn} */}
           <button id={activityId} onClick={() => setTimerOn(true)} type="button">Start timer</button>
-          <button id={activityId} type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Stop timer</button>
+          <button id={activityId} data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Stop timer</button>
         </>
       )}
     </div>
