@@ -9,22 +9,14 @@ import {
 
 const Signup = () => {
   const dispatch = useDispatch();
-
-  const [email, setEmail] = useState('');
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [userInfo, setUserInfo] = useState({ userName: '', userEmail: '', userPassword: '' });
   const history = useHistory();
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleUserNameChange = (e) => {
-    setUserName(e.target.value);
+  const handleUserInfo = (e) => {
+    setUserInfo({
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const successRegisterRedirect = (data) => {
@@ -78,9 +70,9 @@ const Signup = () => {
     e.preventDefault();
     const newUser = {
       user: {
-        email,
-        username: userName,
-        password,
+        email: userInfo.userEmail,
+        username: userInfo.userName,
+        password: userInfo.userPassword,
       },
     };
     const response = await signup(`${baseUrl}/signup`, newUser, { withCredentials: true });
@@ -100,9 +92,9 @@ const Signup = () => {
       <p>Sign up</p>
       <small>Create an account with easily and track your daily activities</small>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} required />
-        <input type="email" placeholder="Enter your email" onChange={handleEmailChange} required />
-        <input type="password" placeholder="Enter your password" onChange={handlePasswordChange} required />
+        <input type="text" name="userName" value={userInfo.userName} placeholder="Enter your name" onChange={handleUserInfo} required />
+        <input type="email" name="userEmail" value={userInfo.userEmail} placeholder="Enter your email" onChange={handleUserInfo} required />
+        <input type="password" name="userPassword" value={userInfo.userPassword} placeholder="Enter your password" onChange={handleUserInfo} required />
         <button type="submit">Sign up</button>
         <span>
           Already have an account?
