@@ -4,7 +4,7 @@ import {
   addActivityAction,
 } from '../Actions';
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = 'https://gentle-taiga-27732.herokuapp.com/api';
 
 const logoutHandler = () => {
   axios.delete(`${baseUrl}/logout`, {
@@ -23,6 +23,7 @@ const activitiesFetcher = (url) => {
 const updateTimer = async (url, hour, minute, comparer, activityId) => {
   await axios.get(url)
     .then((response) => {
+      console.log(response);
       const localUser = JSON.parse(localStorage.getItem('user'));
       const catData = response.data.data.attributes;
       let newHour = catData.hour;
