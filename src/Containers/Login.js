@@ -6,18 +6,16 @@ import { baseUrl, login } from '../APIs/calls';
 import { signInUserAction } from '../Actions';
 
 const Login = () => {
-  const [userName, setUserName] = useState('');
-  const [userPassword, setUserPassword] = useState('');
+  const [userInfor, setUserInfo] = useState({ userName: '', userPassword: '' });
   const [err, setErr] = useState('');
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleUserNameChange = (e) => {
-    setUserName(e.target.value);
-  };
-
-  const handleUserPasswordChange = (e) => {
-    setUserPassword(e.target.value);
+  const handleUserInfo = (e) => {
+    setUserInfo({
+      ...userInfor,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const successLoginRedirect = (data) => {
@@ -29,8 +27,8 @@ const Login = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const logInUser = {
-      username: userName,
-      password: userPassword,
+      username: userInfor.userName,
+      password: userInfor.userPassword,
     };
     try {
       const response = await login(`${baseUrl}/login`, logInUser, { withCredentials: true });
@@ -58,8 +56,8 @@ const Login = () => {
       <p>Log in</p>
       <small>Lets get back to helping you track your activities</small>
       <form onSubmit={handleLoginSubmit} className="form">
-        <input type="text" placeholder="Enter your name" onChange={handleUserNameChange} required />
-        <input type="password" autoComplete="on" placeholder="Enter your password" onChange={handleUserPasswordChange} required />
+        <input type="text" name="userName" value={userInfor.userName} placeholder="Enter your name" onChange={handleUserInfo} required />
+        <input type="password" name="userPassword" value={userInfor.password} autoComplete="on" placeholder="Enter your password" onChange={handleUserInfo} required />
         <button type="submit">Login</button>
         <span>
           No account yet? no worries just

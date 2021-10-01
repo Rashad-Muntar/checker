@@ -94,7 +94,7 @@ const Signup = () => {
       <form onSubmit={handleSubmit}>
         <input type="text" name="userName" value={userInfo.userName} placeholder="Enter your name" onChange={handleUserInfo} required />
         <input type="email" name="userEmail" value={userInfo.userEmail} placeholder="Enter your email" onChange={handleUserInfo} required />
-        <input type="password" name="userPassword" value={userInfo.userPassword} placeholder="Enter your password" onChange={handleUserInfo} required />
+        <input type="password" name="userPassword" autoComplete="on" value={userInfo.userPassword} placeholder="Enter your password" onChange={handleUserInfo} required />
         <button type="submit">Sign up</button>
         <span>
           Already have an account?
