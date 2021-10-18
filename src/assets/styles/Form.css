@@ -1,0 +1,110 @@
+.form-wrapper {
+  width: 40%;
+  margin: 0 auto;
+  border: 1px solid rgb(177, 177, 177);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 10px 0;
+  border-radius: 10px;
+  background-color: rgb(245, 220, 250);
+}
+
+.form-wrapper form {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid rgb(177, 177, 177);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 0;
+  border-radius: 10px;
+  background-color: rgb(245, 220, 250);
+}
+
+.form-wrapper small {
+  margin-bottom: 20px;
+}
+
+.form-wrapper p {
+  color: #3a062d;
+  text-align: left;
+  font-size: 2em;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+}
+
+.form-wrapper i.icon.outline {
+  font-size: 6em;
+  color: #3a062d;
+}
+
+input {
+  border: none;
+  height: 50px;
+  background-color: rgb(217, 170, 226);
+  width: 70%;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 0 20px;
+}
+
+input:focus {
+  outline: none;
+  background-color: rgb(225, 186, 233);
+}
+
+.form-wrapper form button {
+  background-color: #3a062d;
+  padding: 15px 30px;
+  color: white;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+}
+
+.login-message {
+  width: 100%;
+  margin: 0 auto;
+  opacity: 0.6;
+}
+
+.message-wrapper {
+  /* position: absolute !important; */
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+@media screen and (max-width: 460px) {
+  .form-wrapper {
+    width: 90%;
+    margin-top: 50px;
+  }
+
+  input {
+    width: 90%;
+  }
+}
+
+.error-msg {
+  transition: 1s;
+}
+
+.displayMessage {
+  visibility: visible;
+  opacity: 1;
+  transition: 2s;
+}
+
+.hideMessage {
+  display: none;
+  opacity: 0;
+  transition: 2s;
+}
